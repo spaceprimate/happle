@@ -158,6 +158,8 @@ function App() {
     // Optional: Add visual feedback for drag position
     const touch = e.touches[0];
     const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+
+    console.log('Touch move at:', touch.clientX, touch.clientY);
     
     // Reset all button states
     document.querySelectorAll('.word-button-split').forEach(button => {
