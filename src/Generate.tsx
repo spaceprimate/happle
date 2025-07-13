@@ -1,7 +1,7 @@
 import React from 'react';
 
-const sentence = "If you can’t be kind, at least be vague";
-const sentence2 = "This is an example sentence";
+// const sentence = "If you can’t be kind, at least be vague";
+// const sentence2 = "This is an example sentence";
 
 // function splitWordInHalf(word: string): [string, string] {
 //   const mid = Math.ceil(word.length / 2);
