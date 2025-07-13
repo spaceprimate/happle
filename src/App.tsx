@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import './App.css';
 import Generate from './Generate';
 
-interface HappleProps {
-  sentence: string;
-}
 
-const Happle: React.FC<HappleProps> = ({ sentence }) => {
+
+const Happle: React.FC = () => {
+
+
+
+
+  const sentence = 'placeholder for now'
   const [happleWords, setHappleWords] = useState<string[]>([]);
 
   const generateHappleWords = (inputSentence: string): string[] => {
     // Split sentence into words and filter out empty strings
     const words = inputSentence.trim().split(/\s+/).filter(word => word.length > 0);
-    
+
     if (words.length < 2) {
       return words; // Return original if less than 2 words
     }
@@ -39,7 +42,7 @@ const Happle: React.FC<HappleProps> = ({ sentence }) => {
 
     // Combine first halves with shuffled second halves
     const newWords = firstHalves.map((firstHalf, index) => firstHalf + shuffledSecondHalves[index]);
-    
+
     return newWords;
   };
 
@@ -59,8 +62,8 @@ const Happle: React.FC<HappleProps> = ({ sentence }) => {
       <div className="sentence-display">
         <strong>Original Sentence:</strong> "{sentence}"
       </div>
-      
-      <button 
+
+      <button
         className="generate-button"
         onClick={handleGenerateWords}
         disabled={!sentence.trim()}
@@ -89,6 +92,38 @@ const Happle: React.FC<HappleProps> = ({ sentence }) => {
 };
 
 function App() {
+  const words = [
+    { first: 'I', second: 'u', original: 'f' },
+    { first: 'yo', second: '’t', original: 'u' },
+    { first: 'can', second: 'e', original: '’t' },
+    { first: 'b', second: 'f', original: 'e' },
+    { first: 'kin', second: 'e', original: 'd,' },
+    { first: 'a', second: 'ue', original: 't' },
+    { first: 'lea', second: 't', original: 'st' },
+    { first: 'b', second: 'st', original: 'e' },
+    { first: 'vag', second: 'd,', original: 'ue' }
+  ]
+
+  const wordContent = words.map((word, index) => (
+    <button
+      key={index}
+      className="word-button word-button-split"
+      onClick={() => console.log(`Clicked word ${index + 1}: ${word.first}${word.second}`)}
+    >
+      <div className='left'>{word.first}</div>
+      <div className='right'>{word.second}</div>
+    </button>
+  ));
+
+
+
+
+
+
+
+
+
+
   const [inputSentence, setInputSentence] = useState('');
   const [currentSentence, setCurrentSentence] = useState('');
 
@@ -107,6 +142,13 @@ function App() {
       </header>
 
       <main className="app-main">
+        <div className='sentence-form'>
+          <div className='word-buttons'>
+            {wordContent}
+
+          </div>
+        </div>
+        <hr />
         <form onSubmit={handleSubmit} className="sentence-form">
           <div className="input-group">
             <label htmlFor="sentence-input">Enter a sentence:</label>
@@ -124,9 +166,9 @@ function App() {
           </button>
         </form>
 
-        {currentSentence && <Happle sentence={currentSentence} />}
+        {currentSentence && <Happle />}
       </main>
-      <Generate />
+      {window.location.hash === '#admin' && <Generate />}
     </div>
   );
 }

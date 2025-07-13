@@ -145,8 +145,31 @@
   cursor: pointer;
   transition: all 0.3s ease;
   min-width: 100px;
-  text-transform: capitalize;
+  text-transform: uppercase;
 }
+
+.word-buttons .word-button.word-button-split {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  min-width: 0;
+}
+
+.word-buttons .word-button.word-button-split .left{
+  padding: 0.75rem 0 0.75em 1.5rem;
+  background-color: #4ac5ac;
+  border-bottom-left-radius: 25px;
+  border-top-left-radius: 25px;
+}
+.word-buttons .word-button.word-button-split .right{
+  padding: 0.75rem 1.5rem 0.75em 0;
+  background-color: #4ac5ac;
+  border-bottom-right-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+
 
 .word-button:hover {
   transform: translateY(-3px) scale(1.05);
@@ -158,6 +181,13 @@
   transform: translateY(-1px) scale(1.02);
 }
 
+.word-buttons .word-button.word-button-split:hover{
+  background-color: inherit;
+
+}
+.word-buttons .word-button.word-button-split:hover .right{
+  background-color: #2d8573;
+}
 /* Responsive design */
 @media (max-width: 768px) {
   .app {
