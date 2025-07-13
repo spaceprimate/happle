@@ -65,7 +65,7 @@
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* transition: transform 0.2s ease, box-shadow 0.2s ease; */
 }
 
 .submit-button:hover {
@@ -103,7 +103,7 @@
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* transition: transform 0.2s ease, box-shadow 0.2s ease; */
   margin-bottom: 2rem;
 }
 
@@ -172,13 +172,13 @@
 
 
 .word-button:hover {
-  transform: translateY(-3px) scale(1.05);
+  /* transform: translateY(-3px) scale(1.05); */
   box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
   background: linear-gradient(135deg, #5fd3cb, #4ecdc4);
 }
 
 .word-button:active {
-  transform: translateY(-1px) scale(1.02);
+  /* transform: translateY(-1px) scale(1.02); */
 }
 
 .word-buttons .word-button.word-button-split:hover{
@@ -217,6 +217,7 @@
   .word-buttons .word-button.word-button-split .right[draggable="true"]:active {
     background-color: #5fd3cb !important;
     transform: scale(1.1);
+    /* color: #5fa8d360; */
   }
 }
 
@@ -226,20 +227,48 @@
 
 .word-buttons .word-button.word-button-split[drag-over="true"] {
   background: rgba(78, 205, 196, 0.2);
-  border: 2px dashed #4ecdc4;
+  /* border: 2px dashed #4ecdc4; */
 }
 
 /* Touch drag feedback */
 .word-buttons .word-button.word-button-split[data-drag-over="true"] {
   background: rgba(78, 205, 196, 0.3) !important;
-  border: 2px solid #4ecdc4;
-  transform: scale(1.02);
+  /* border: 2px solid #4ecdc4; */
+  /* transform: scale(1.02); */
   transition: all 0.1s ease;
 }
 
 .word-buttons .word-button.word-button-split .right:active {
   background-color: #5fd3cb !important;
   transition: none;
+}
+
+/* Floating drag element styles */
+.touch-drag-element {
+  position: fixed !important;
+
+  pointer-events: none !important;
+  z-index: 9999 !important;
+  /* transform: scale(1.1) !important; */
+  opacity: 0.8 !important;
+  box-shadow: 0 8px 20px rgba(78, 205, 196, 0.4) !important;
+  background-color: #5fd3cb !important;
+  border-radius: 25px !important;
+  transition: none !important;
+}
+
+/* Original element being dragged */
+.word-buttons .word-button.word-button-split .right[data-dragging="true"] {
+  opacity: 0.3 !important;
+  background-color: #5fd3cb !important;
+}
+
+/* Prevent scrolling during touch drag */
+body.touch-dragging {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 /* Responsive design */
