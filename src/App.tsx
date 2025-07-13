@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Generate from './Generate';
 
@@ -105,8 +105,32 @@ function App() {
   ]);
 
   // Touch drag state
-  // region: drag logic
   const [touchDragIndex, setTouchDragIndex] = useState<number | null>(null);
+  const [dragElement, setDragElement] = useState<HTMLElement | null>(null);
+
+  // Helper function to safely remove drag element
+  const removeDragElement = useCallback(() => {
+    if (dragElement && dragElement.parentNode) {
+      try {
+        document.body.removeChild(dragElement);
+      } catch (error) {
+        // Element might already be removed, ignore the error
+        console.warn('Drag element removal error:', error);
+      }
+    }
+    setDragElement(null);
+    document.body.classList.remove('touch-dragging');
+  }, [dragElement]);
+
+  // Cleanup effect for drag element
+  useEffect(() => {
+    return () => {
+      // Cleanup drag element if component unmounts during drag
+      if (dragElement) {
+        removeDragElement();
+      }
+    };
+  }, [dragElement, removeDragElement]);
 
   const wordDragged = (button1Index: number, button2Index: number) => {
     console.log(`Dragged from button ${button1Index + 1} to button ${button2Index + 1}`);
@@ -139,25 +163,47 @@ function App() {
 
   // Touch event handlers for mobile devices
   const handleTouchStart = (e: React.TouchEvent, index: number) => {
-    // Prevent scrolling while dragging
-    // e.preventDefault();
-
+    // Prevent multiple drag operations
+    if (touchDragIndex !== null || dragElement) {
+      return;
+    }
+    
     setTouchDragIndex(index);
     
-    // Add visual feedback
-    const rightElement = e.target as HTMLElement;
-    rightElement.style.backgroundColor = '#5fd3cb';
+    // Prevent scrolling during drag by adding CSS class
+    document.body.classList.add('touch-dragging');
     
+    // Create floating drag element
+    const originalElement = e.target as HTMLElement;
+    const rect = originalElement.getBoundingClientRect();
+    
+    // Create a clone of the element for dragging
+    const dragClone = originalElement.cloneNode(true) as HTMLElement;
+    dragClone.className = 'touch-drag-element';
+    dragClone.style.top = `${rect.top}px`;
+    dragClone.style.left = `${rect.left}px`;
+    dragClone.style.width = `${rect.width}px`;
+    dragClone.style.height = `${rect.height}px`;
+    // dragClone.style.border = '8px solid #5fa8d360';
+    
+    document.body.appendChild(dragClone);
+    setDragElement(dragClone);
+    
+    // Add visual feedback to original element
+    originalElement.setAttribute('data-dragging', 'true');
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    // e.preventDefault();
-    if (touchDragIndex === null) return;
-    // Prevent scrolling while dragging
+    if (touchDragIndex === null || !dragElement) return;
     
-    // Optional: Add visual feedback for drag position
     const touch = e.touches[0];
-    const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+    
+    // Update drag element position
+    const newX = touch.clientX - dragElement.offsetWidth / 2;
+    const newY = touch.clientY - dragElement.offsetHeight / 2;
+    
+    dragElement.style.left = `${newX}px`;
+    dragElement.style.top = `${newY}px`;
 
     console.log('Touch move at:', touch.clientX, touch.clientY);
     
@@ -167,6 +213,7 @@ function App() {
     });
     
     // Find the button element we're hovering over
+    const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
     let targetButton = elementBelow;
     while (targetButton && !targetButton.classList.contains('word-button-split')) {
       targetButton = targetButton.parentElement;
@@ -178,6 +225,7 @@ function App() {
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
+    // Only proceed if there's an active drag
     if (touchDragIndex === null) return;
     
     const touch = e.changedTouches[0];
@@ -199,14 +247,18 @@ function App() {
       }
     }
     
+    // Clean up drag element
+    removeDragElement();
+    
     // Reset visual states
     const rightElement = e.target as HTMLElement;
-    rightElement.style.backgroundColor = '';
+    rightElement.removeAttribute('data-dragging');
     document.querySelectorAll('.word-button-split').forEach(button => {
       button.removeAttribute('data-drag-over');
     });
     
     setTouchDragIndex(null);
+
   };
 
   const wordContent = words.map((word, index) => (
@@ -228,8 +280,8 @@ function App() {
         style={{
           position: touchDragIndex === index ? 'relative' : 'static',
           zIndex: touchDragIndex === index ? 1000 : 'auto',
-          transform: touchDragIndex === index ? 'scale(1.1)' : 'none',
-          transition: touchDragIndex === index ? 'none' : 'transform 0.2s ease'
+          // transform: touchDragIndex === index ? 'scale(1.1)' : 'none',
+          // transition: touchDragIndex === index ? 'none' : 'transform 0.2s ease'
         }}
       >
         {word.second}
