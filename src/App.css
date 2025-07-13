@@ -1,0 +1,185 @@
+.app {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.app-header {
+  margin-bottom: 2rem;
+}
+
+.app-header h1 {
+  color: #646cff;
+  margin-bottom: 0.5rem;
+}
+
+.app-header p {
+  color: #888;
+  font-size: 1.1rem;
+}
+
+.sentence-form {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #ddd;
+}
+
+.sentence-input {
+  width: 100%;
+  max-width: 500px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: 2px solid rgba(100, 108, 255, 0.3);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.sentence-input:focus {
+  outline: none;
+  border-color: #646cff;
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #646cff, #535bf2);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(100, 108, 255, 0.4);
+}
+
+.happle-container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.happle-container h2 {
+  color: #646cff;
+  margin-bottom: 1.5rem;
+}
+
+.sentence-display {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.generate-button {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 2rem;
+}
+
+.generate-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+.generate-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.happle-words {
+  margin-top: 2rem;
+}
+
+.happle-words h3 {
+  color: #4ecdc4;
+  margin-bottom: 1.5rem;
+}
+
+.word-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.word-button {
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+  text-transform: capitalize;
+}
+
+.word-button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+  background: linear-gradient(135deg, #5fd3cb, #4ecdc4);
+}
+
+.word-button:active {
+  transform: translateY(-1px) scale(1.02);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem;
+  }
+  
+  .sentence-form,
+  .happle-container {
+    padding: 1.5rem;
+  }
+  
+  .word-buttons {
+    gap: 0.5rem;
+  }
+  
+  .word-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    min-width: 80px;
+  }
+  
+  .app-header h1 {
+    font-size: 2.5rem;
+  }
+}
