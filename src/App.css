@@ -188,6 +188,60 @@
 .word-buttons .word-button.word-button-split:hover .right{
   background-color: #2d8573;
 }
+
+/* Drag and drop styles */
+.word-buttons .word-button.word-button-split .right[draggable="true"] {
+  cursor: grab;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.word-buttons .word-button.word-button-split .right[draggable="true"]:hover {
+  background-color: #5fd3cb !important;
+  transform: scale(1.05);
+}
+
+.word-buttons .word-button.word-button-split .right[draggable="true"]:active {
+  cursor: grabbing;
+  transform: scale(0.95);
+}
+
+/* Touch-specific styles */
+@media (hover: none) and (pointer: coarse) {
+  .word-buttons .word-button.word-button-split .right[draggable="true"] {
+    cursor: default;
+  }
+  
+  .word-buttons .word-button.word-button-split .right[draggable="true"]:active {
+    background-color: #5fd3cb !important;
+    transform: scale(1.1);
+  }
+}
+
+.word-buttons .word-button.word-button-split[dragging="true"] {
+  opacity: 0.5;
+}
+
+.word-buttons .word-button.word-button-split[drag-over="true"] {
+  background: rgba(78, 205, 196, 0.2);
+  border: 2px dashed #4ecdc4;
+}
+
+/* Touch drag feedback */
+.word-buttons .word-button.word-button-split[data-drag-over="true"] {
+  background: rgba(78, 205, 196, 0.3) !important;
+  border: 2px solid #4ecdc4;
+  transform: scale(1.02);
+  transition: all 0.1s ease;
+}
+
+.word-buttons .word-button.word-button-split .right:active {
+  background-color: #5fd3cb !important;
+  transition: none;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .app {
