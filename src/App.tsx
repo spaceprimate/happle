@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import Generate from './Generate';
 
 interface HappleProps {
   sentence: string;
@@ -125,6 +126,7 @@ function App() {
 
         {currentSentence && <Happle sentence={currentSentence} />}
       </main>
+      <Generate />
     </div>
   );
 }
