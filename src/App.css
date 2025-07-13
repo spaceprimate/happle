@@ -217,6 +217,7 @@
   .word-buttons .word-button.word-button-split .right[draggable="true"]:active {
     background-color: #5fd3cb !important;
     transform: scale(1.1);
+    /* color: #5fa8d360; */
   }
 }
 
