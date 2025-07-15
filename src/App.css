@@ -11,7 +11,7 @@
 
 .app-header h1 {
   color: #646cff;
-  margin-bottom: 0.5rem;
+  margin: 0;
 }
 
 .app-header p {
@@ -23,9 +23,13 @@
   background: rgba(255, 255, 255, 0.05);
   padding: 2rem;
   border-radius: 12px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.3rem;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+app.solved {
+  background: #afffaf;
 }
 
 .input-group {
@@ -134,6 +138,10 @@
   justify-content: center;
 }
 
+.word-buttons .author{
+  padding-top: 1.2rem;
+}
+
 .word-button {
   background: linear-gradient(135deg, #4ecdc4, #44a08d);
   color: white;
@@ -167,6 +175,11 @@
   background-color: #4ac5ac;
   border-bottom-right-radius: 25px;
   border-top-right-radius: 25px;
+}
+
+.app.solved .word-button.word-button-split .left,
+.app.solved .word-button.word-button-split .right {
+  background-color: #3d933a;
 }
 
 
@@ -271,6 +284,83 @@ body.touch-dragging {
   height: 100%;
 }
 
+footer.app-footer{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+footer.app-footer .stats{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+footer.app-footer .stats .badge{
+  display: inline-block;
+  padding: 0 0.5rem;
+  background-color: #404aca;
+  border-radius: 25px;
+  font-size: 1rem;
+  color: white;
+  line-height: 1rem;
+  height: 1.2rem;
+}
+
+footer.app-footer .stats div{
+  color: #ddd;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.footer-date {
+  color: #ddd;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.share-button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.share-button .badge {
+  display: inline-block;
+  padding: 0 .5rem;
+  background-color: #cd4e4e;
+  border-radius: 25px;
+  color: white;
+  font-size: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.share-button .badge:hover {
+  background-color: #8f2f2f;
+}
+
+.share-button .copied-overlay {
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  /* transform: translateX(-50%); */
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;  
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  width: 120px;
+}
+.share-button .copied-overlay.show {
+  opacity: 1;
+}
+
+
+
 /* Responsive design */
 @media (max-width: 768px) {
   .app {
@@ -295,4 +385,20 @@ body.touch-dragging {
   .app-header h1 {
     font-size: 2.5rem;
   }
+}
+
+
+.text-button{
+  background-color: transparent;
+  border: none;
+  color: #5fd3cb;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: background-color 0.2s ease;
+}
+
+.text-button:hover {
+  background-color: rgba(78, 205, 196, 0.1);
 }

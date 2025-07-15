@@ -1,5 +1,11 @@
 # TODO: 
 - [ ] Create sentence generator
+- [ ] add author's name
+- [ ] add sentences json file that contains author and sentence
+- [ ] 
+- [ ] 
+- [ ] 
+- [ ] 
 
 
 

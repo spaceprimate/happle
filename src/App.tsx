@@ -1,108 +1,116 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Generate from './Generate';
+import Confetti from './Confetti';
+import { daysSince, quotesData } from './quotes';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './fontawesome';
 
 
 
-const Happle: React.FC = () => {
 
-
-
-
-  const sentence = 'placeholder for now'
-  const [happleWords, setHappleWords] = useState<string[]>([]);
-
-  const generateHappleWords = (inputSentence: string): string[] => {
-    // Split sentence into words and filter out empty strings
-    const words = inputSentence.trim().split(/\s+/).filter(word => word.length > 0);
-
-    if (words.length < 2) {
-      return words; // Return original if less than 2 words
-    }
-
-    // Split each word in half
-    const wordHalves: { firstHalf: string; secondHalf: string }[] = words.map(word => {
-      const midPoint = Math.floor(word.length / 2);
-      return {
-        firstHalf: word.slice(0, midPoint),
-        secondHalf: word.slice(midPoint)
-      };
-    });
-
-    // Create arrays of first and second halves
-    const firstHalves = wordHalves.map(w => w.firstHalf);
-    const secondHalves = wordHalves.map(w => w.secondHalf);
-
-    // Shuffle the second halves
-    const shuffledSecondHalves = [...secondHalves];
-    for (let i = shuffledSecondHalves.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledSecondHalves[i], shuffledSecondHalves[j]] = [shuffledSecondHalves[j], shuffledSecondHalves[i]];
-    }
-
-    // Combine first halves with shuffled second halves
-    const newWords = firstHalves.map((firstHalf, index) => firstHalf + shuffledSecondHalves[index]);
-
-    return newWords;
-  };
-
-  const handleGenerateWords = () => {
-    const newWords = generateHappleWords(sentence);
-    setHappleWords(newWords);
-  };
-
-  const handleWordClick = (word: string, index: number) => {
-    console.log(`Clicked word ${index + 1}: ${word}`);
-    // Add any additional functionality for word clicks here
-  };
-
-  return (
-    <div className="happle-container">
-      <h2>Happle Word Game</h2>
-      <div className="sentence-display">
-        <strong>Original Sentence:</strong> "{sentence}"
-      </div>
-
-      <button
-        className="generate-button"
-        onClick={handleGenerateWords}
-        disabled={!sentence.trim()}
-      >
-        Generate Happle Words
-      </button>
-
-      {happleWords.length > 0 && (
-        <div className="happle-words">
-          <h3>Happle Words:</h3>
-          <div className="word-buttons">
-            {happleWords.map((word, index) => (
-              <button
-                key={index}
-                className="word-button"
-                onClick={() => handleWordClick(word, index)}
-              >
-                {word}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
 
 function App() {
-  const [words, setWords] = useState([
-    { first: 'I', second: 'u', original: 'f' },
-    { first: 'yo', second: 't', original: 'u' },
-    { first: 'can', second: 'e', original: 't' },
-    { first: 'b', second: 'f', original: 'e' },
-    { first: 'kin', second: 'e', original: 'd,' },
-    { first: 'a', second: 'ue', original: 't' },
-    { first: 'lea', second: 't', original: 'st' },
-    { first: 'b', second: 'st', original: 'e' },
-    { first: 'vag', second: 'd,', original: 'ue' }
-  ]);
+  const [words, setWords] = useState(quotesData[daysSince() % quotesData.length].words);
+  const author = quotesData[daysSince() % quotesData.length].author;
+
+  const [wordPath, setWordPath] = useState<string[]>([]);
+  const [scorePath, setScorePath] = useState<string[]>([]);
+  const [showCopiedOverlay, setShowCopiedOverlay] = useState(false);
+
+  const updateWordPath = (p: string, b: boolean) => {
+    const path = wordPath.concat(p);
+    setWordPath(path);
+
+    const score = scorePath.concat(b ? '🟩' : '🟥' );
+    setScorePath(score);
+    console.log('Word path updated:', path);
+  }
+
+  const copyScore = () => {
+    const scoreData = {
+      attempts: attempts + 1,
+      numberCorrect,
+      wordPath,
+    };
+    const text = `H🍏 - Solved in ${attempts + 1}!\n` + scorePath.join(' ');
+    // console.log(scorePath)
+    // const text = JSON.stringify(scoreData, null, 2);
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text)
+        .then(() => {
+          // console.log('Score copied to clipboard');
+          setShowCopiedOverlay(true);
+          setTimeout(() => setShowCopiedOverlay(false), 2000);
+        })
+        .catch(err => console.error('Failed to copy score:', err));
+    } else {
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        console.log('Score copied to clipboard');
+        setShowCopiedOverlay(true);
+        setTimeout(() => setShowCopiedOverlay(false), 2000);
+      } catch (err) {
+        console.error('Failed to copy score:', err);
+      }
+      document.body.removeChild(textarea);
+
+
+    }
+  };
+
+  // const [dateOffset, setDateOffset] = useState(quotesData[daysSince() % quotesData.length].words);
+  // console.log('days since:', daysSince() % quotesData.length);
+
+  // console.log('words:', quotesData);
+
+  // const [words, setWords] = useState([
+  //   { first: 'I', second: 'u', original: 'f' },
+  //   { first: 'yo', second: 't', original: 'u' },
+  //   { first: 'can', second: 'e', original: 't' },
+  //   { first: 'b', second: 'f', original: 'e' },
+  //   { first: 'kin', second: 'e', original: 'd,' },
+  //   { first: 'a', second: 'ue', original: 't' },
+  //   { first: 'lea', second: 't', original: 'st' },
+  //   { first: 'b', second: 'st', original: 'e' },
+  //   { first: 'vag', second: 'd,', original: 'ue' }
+  // ]);
+
+  // const handlePreviousQuote = () => {
+  //   setDateOffset(dateOffset - 1);
+  //   setWords(quotesData[dateOffset].words);
+  //   console.log('Previous quote words:', index);
+  // }
+
+  // const handleNextQuote = () => {
+  //   const index = (daysSince() + 1) % quotesData.length;
+  //   setWords(quotesData[index].words);
+  //   console.log('Next quote words:', quotesData[index].words);
+  // }
+
+  const [attempts, setAttempts] = useState(-2);
+  const [numberCorrect, setNumberCorrect] = useState(0);
+  const [isSolved, setIsSolved] = useState(false);
+
+  useEffect(() => {
+    const index = daysSince() % quotesData.length;
+    setWords(quotesData[index].words);
+    // console.log('New words set:', quotesData[index].words);
+  }, []);
+
+  useEffect(() => {
+    // Initialize words or perform any setup logic
+    const solvedWords = words.filter(word => word.second === word.original);
+    // console.log('Solved words:', solvedWords);
+    setAttempts(attempts + 1);
+    setNumberCorrect(solvedWords.length);
+    setIsSolved(solvedWords.length === words.length);
+  }, [words]);
 
   // Touch drag state
   const [touchDragIndex, setTouchDragIndex] = useState<number | null>(null);
@@ -134,12 +142,19 @@ function App() {
 
   const wordDragged = (button1Index: number, button2Index: number) => {
     console.log(`Dragged from button ${button1Index + 1} to button ${button2Index + 1}`);
-    
+
     // Swap the second halves of the two buttons
     const newWords = [...words];
     const temp = newWords[button1Index].second;
     newWords[button1Index].second = newWords[button2Index].second;
     newWords[button2Index].second = temp;
+    updateWordPath(
+      (newWords[button2Index].first + newWords[button2Index].second),
+      newWords[button2Index].original === newWords[button2Index].second
+  );
+    // console.log('-------------------------------------')
+    // console.log((newWords[button2Index].first + newWords[button2Index].second));
+    // console.log(words)
     setWords(newWords);
   };
 
@@ -167,16 +182,16 @@ function App() {
     if (touchDragIndex !== null || dragElement) {
       return;
     }
-    
+
     setTouchDragIndex(index);
-    
+
     // Prevent scrolling during drag by adding CSS class
     document.body.classList.add('touch-dragging');
-    
+
     // Create floating drag element
     const originalElement = e.target as HTMLElement;
     const rect = originalElement.getBoundingClientRect();
-    
+
     // Create a clone of the element for dragging
     const dragClone = originalElement.cloneNode(true) as HTMLElement;
     dragClone.className = 'touch-drag-element';
@@ -185,79 +200,102 @@ function App() {
     dragClone.style.width = `${rect.width}px`;
     dragClone.style.height = `${rect.height}px`;
     // dragClone.style.border = '8px solid #5fa8d360';
-    
+
     document.body.appendChild(dragClone);
     setDragElement(dragClone);
-    
+
     // Add visual feedback to original element
     originalElement.setAttribute('data-dragging', 'true');
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (touchDragIndex === null || !dragElement) return;
-    
+
     const touch = e.touches[0];
-    
+
     // Update drag element position
     const newX = touch.clientX - dragElement.offsetWidth / 2;
     const newY = touch.clientY - dragElement.offsetHeight / 2;
-    
+
     dragElement.style.left = `${newX}px`;
     dragElement.style.top = `${newY}px`;
 
-    console.log('Touch move at:', touch.clientX, touch.clientY);
-    
+    // console.log('Touch move at:', touch.clientX, touch.clientY);
+
     // Reset all button states
     document.querySelectorAll('.word-button-split').forEach(button => {
       button.removeAttribute('data-drag-over');
     });
-    
+
     // Find the button element we're hovering over
     const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
     let targetButton = elementBelow;
     while (targetButton && !targetButton.classList.contains('word-button-split')) {
       targetButton = targetButton.parentElement;
     }
-    
+
     if (targetButton && targetButton !== e.currentTarget) {
       targetButton.setAttribute('data-drag-over', 'true');
     }
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
+
+    // console.log('Touch end:', touchDragIndex);
     // Only proceed if there's an active drag
     if (touchDragIndex === null) return;
-    
+
     const touch = e.changedTouches[0];
     const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
-    
+
     // Find the button element (could be the button itself or a child element)
     let targetButton = elementBelow;
     while (targetButton && !targetButton.classList.contains('word-button-split')) {
       targetButton = targetButton.parentElement;
     }
-    
+
     if (targetButton) {
       // Find the index of the target button
       const buttons = document.querySelectorAll('.word-button-split');
       const dropIndex = Array.from(buttons).indexOf(targetButton as Element);
-      
+
       if (dropIndex !== -1 && dropIndex !== touchDragIndex) {
         wordDragged(touchDragIndex, dropIndex);
       }
     }
-    
+
     // Clean up drag element
     removeDragElement();
-    
+
     // Reset visual states
     const rightElement = e.target as HTMLElement;
     rightElement.removeAttribute('data-dragging');
     document.querySelectorAll('.word-button-split').forEach(button => {
       button.removeAttribute('data-drag-over');
     });
-    
+
+
+
     setTouchDragIndex(null);
+
+    // deselect any text that might have been selected during the drag.
+    // make sure no buttons are selected or active
+    document.querySelectorAll('.right').forEach(el => {
+      (el as HTMLElement).blur();
+      el.removeAttribute('data-dragging');
+      // el.classList.remove('focus-visible');
+      // el.classList.remove('active');
+      // el.classList.remove('hover');
+    });
+
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      if (selection) selection.removeAllRanges();
+    } else if ((document as any).selection) {
+      (document as any).selection.empty();
+    }
+
+
 
   };
 
@@ -270,7 +308,7 @@ function App() {
       onDrop={(e) => handleDrop(e, index)}
     >
       <div className='left'>{word.first}</div>
-      <div 
+      <div
         className='right'
         draggable
         onDragStart={(e) => handleDragStart(e, index)}
@@ -284,56 +322,65 @@ function App() {
           // transition: touchDragIndex === index ? 'none' : 'transform 0.2s ease'
         }}
       >
-        {word.second}
+        {word.second !== '' ? word.second : '\u00A0'}
       </div>
     </button>
   ));
 
-  const [inputSentence, setInputSentence] = useState('');
-  const [currentSentence, setCurrentSentence] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (inputSentence.trim()) {
-      setCurrentSentence(inputSentence.trim());
-    }
-  };
+
+
 
   return (
-    <div className="app">
+    <div className={`app ${isSolved ? 'solved' : ''}`}>
       <header className="app-header">
-        <h1>Happle - Word Mixing Game</h1>
-        <p>Enter a sentence and watch the words get mixed up!</p>
+        <h1>
+          {isSolved ? 'Congrats!' : 'HAPPLE'}
+        </h1>
+        {!isSolved && <p>Drag to rearrange the last half of each word to find the sentence</p>}
+        {isSolved && <p>You have found the sentence!</p>}
       </header>
 
       <main className="app-main">
         <div className='sentence-form'>
           <div className='word-buttons'>
             {wordContent}
-
+            {isSolved && <span className='author'>― {author}</span>}
           </div>
         </div>
-        <hr />
-        <form onSubmit={handleSubmit} className="sentence-form">
-          <div className="input-group">
-            <label htmlFor="sentence-input">Enter a sentence:</label>
-            <input
-              id="sentence-input"
-              type="text"
-              value={inputSentence}
-              onChange={(e) => setInputSentence(e.target.value)}
-              placeholder="Type your sentence here..."
-              className="sentence-input"
-            />
-          </div>
-          <button type="submit" className="submit-button">
-            Set Sentence
-          </button>
-        </form>
 
-        {currentSentence && <Happle />}
+
       </main>
+      <footer className="app-footer">
+
+        <div className='stats'>
+          <div><span>Attempt: </span><span className='badge'>{attempts + 1}</span></div>
+          <div><span>Correct: </span><span className='badge'>{numberCorrect}</span></div>
+
+
+
+        </div>
+
+        {isSolved && <div className='share-button'>
+          <span className='badge' onClick={copyScore}>
+            <FontAwesomeIcon icon="share" /> SHARE
+          </span>
+          <span className={`badge copied-overlay ${showCopiedOverlay ? 'show' : ''}`}>
+            <FontAwesomeIcon icon="check" /> SCORE COPIED!
+          </span>
+        </div>}
+        {/* <div className='date-button'>`
+          {daysSince() % quotesData.length !== 0 && (
+            <button onClick={handlePreviousQuote} className='text-button'>Previous puzzle</button>
+          )}
+        </div> */}
+      </footer>
+      <div className='footer-date'>
+        {new Date().toLocaleDateString('de-AT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Europe/Vienna' })}
+        {/* {new Date().toDateString()} */}
+      </div>
       {window.location.hash === '#admin' && <Generate />}
+      {isSolved && <Confetti />}
     </div>
   );
 }

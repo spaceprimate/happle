@@ -11,10 +11,12 @@ import React from 'react';
 
 function splitWords(sentence: string): [string, string][] {
   // const s1 = sentence.split(' ').map(splitWordInHalf);
-  const s1 = sentence.split(' ')
+  const s0 = sentence.replace("'", "");
+  const s1 = s0.split(' ')
   const s2: [string, string][] = s1.map(word => {
     const mid = Math.ceil(word.length / 2);
-    return [word.slice(0, mid), word.slice(mid)];
+    // const second = word.slice(mid).length > 0 ? word.slice(mid) : ' ';
+    return [word.slice(0, mid),  word.slice(mid)];
   })
   // const w2 = shuffleSecondStrings(w1);
   return s2;
