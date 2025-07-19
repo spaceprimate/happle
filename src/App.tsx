@@ -28,11 +28,11 @@ function App() {
   }
 
   const copyScore = () => {
-    const scoreData = {
-      attempts: attempts + 1,
-      numberCorrect,
-      wordPath,
-    };
+    // const scoreData = {
+    //   attempts: attempts + 1,
+    //   numberCorrect,
+    //   wordPath,
+    // };
     const text = `H🍏 - Solved in ${attempts + 1}!\n` + scorePath.join(' ');
     // console.log(scorePath)
     // const text = JSON.stringify(scoreData, null, 2);
