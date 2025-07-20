@@ -90,14 +90,17 @@ export const quotesData = [
   },
   {
     id: 6,
-    author: 'Garrison Keillor',
-    quote: "when in doubt look intelligent",
+    author: 'Data',
+    quote: "If you prick me, do I not leak?",
     words: [
-      { first: 'wh', second: 'bt', original: 'en' },
-      { first: 'i', second: 'en', original: 'n' },
-      { first: 'dou', second: 'igent', original: 'bt' },
-      { first: 'lo', second: 'n', original: 'ok' },
-      { first: 'intell', second: 'ok', original: 'igent' }
+      { first: 'I', second: ',', original: 'f' },
+      { first: 'yo', second: 'f', original: 'u' },
+      { first: 'pri', second: 't', original: 'ck' },
+      { first: 'me', second: '', original: ',' },
+      { first: 'd', second: 'k?', original: 'o' },
+      { first: 'I', second: 'ck', original: '' },
+      { first: 'no', second: 'o', original: 't' },
+      { first: 'lea', second: 'u', original: 'k?' }
     ]
   },
   {
