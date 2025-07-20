@@ -147,8 +147,6 @@ function App() {
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [isSolved, setIsSolved] = useState(false);
 
-  // calculates the index of the current quote based on the number of days since a 
-  // reference date, the grabs the appropriate quote from the quotesData array
   useEffect(() => {
     const index = daysSince() % quotesData.length;
     setWords(quotesData[index].words);
@@ -168,7 +166,7 @@ function App() {
   // Touch event handlers removed - using React DnD instead
 
   const wordDragged = (button1Index: number, button2Index: number) => {
-    console.log(`Dragged from buttonZZZZ ${button1Index + 1} to button ${button2Index + 1}`);
+    console.log(`Dragged from button ${button1Index + 1} to button ${button2Index + 1}`);
 
     // Swap the second halves of the two buttons
     const newWords = [...words];
