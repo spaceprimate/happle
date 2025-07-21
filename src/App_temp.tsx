@@ -18,6 +18,7 @@ interface WordHalfProps {
   onWordDragged: (dragIndex: number, hoverIndex: number) => void;
 }
 
+// onWordDragged will accept the wordButton function, which handles the updates
 const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged }) => {
   const [{ isDragging }, drag] = useDrag({
     type: ItemType,
@@ -147,12 +148,16 @@ function App() {
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [isSolved, setIsSolved] = useState(false);
 
+  // calculates the index of the current quote based on the number of days since a 
+  // reference date, the grabs the appropriate quote from the quotesData array
   useEffect(() => {
     const index = daysSince() % quotesData.length;
     setWords(quotesData[index].words);
     // console.log('New words set:', quotesData[index].words);
   }, []);
 
+  // on each update of the words, check if the words are solved
+  // and update attempts and numberCorrect accordingly
   useEffect(() => {
     // Initialize words or perform any setup logic
     const solvedWords = words.filter(word => word.second === word.original);
@@ -162,8 +167,6 @@ function App() {
     setIsSolved(solvedWords.length === words.length);
   }, [words]);
 
-  // Touch drag state - REMOVED (now using React DnD)
-  // Touch event handlers removed - using React DnD instead
 
   const wordDragged = (button1Index: number, button2Index: number) => {
     console.log(`Dragged from button ${button1Index + 1} to button ${button2Index + 1}`);

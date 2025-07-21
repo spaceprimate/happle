@@ -198,7 +198,8 @@ app.solved {
   background-color: inherit;
 
 }
-.word-buttons .word-button.word-button-split:hover .right{
+.word-buttons .word-button.word-button-split:hover .right,
+.word-buttons .word-button.word-button-split:focus .right {
   background-color: #2d8573;
 }
 
@@ -401,4 +402,26 @@ footer.app-footer .stats div{
 
 .text-button:hover {
   background-color: rgba(78, 205, 196, 0.1);
+}
+
+/* Click-to-swap selection styles */
+.word-button.selected {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+  animation: pulse-selected 1.5s infinite;
+}
+
+.word-button.selected .left,
+.word-button.selected .right {
+  background-color: #c44569;
+}
+
+@keyframes pulse-selected {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
+  }
 }

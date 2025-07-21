@@ -16,9 +16,12 @@ interface WordHalfProps {
   word: { first: string; second: string; original: string };
   index: number;
   onWordDragged: (dragIndex: number, hoverIndex: number) => void;
+  onButtonClick: (index: number) => void;
+  isSelected: boolean;
 }
 
-const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged }) => {
+// onWordDragged will accept the wordButton function, which handles the updates
+const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged, onButtonClick, isSelected }) => {
   const [{ isDragging }, drag] = useDrag({
     type: ItemType,
     item: { index },
@@ -39,11 +42,16 @@ const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged }) => 
     }),
   });
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent background click handler
+    onButtonClick(index);
+  };
+
   return (
     <button
       ref={(node) => drag(drop(node))}
-      className={`word-button word-button-split ${isDragging ? 'dragging' : ''} ${isOver ? 'drop-over' : ''}`}
-      onClick={() => console.log(`Clicked word ${index + 1}: ${word.first}${word.second}`)}
+      className={`word-button word-button-split ${isDragging ? 'dragging' : ''} ${isOver ? 'drop-over' : ''} ${isSelected ? 'selected' : ''}`}
+      onClick={handleClick}
       style={{
         opacity: isDragging ? 0.5 : 1,
       }}
@@ -146,6 +154,9 @@ function App() {
   const [attempts, setAttempts] = useState(-2);
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [isSolved, setIsSolved] = useState(false);
+  
+  // Click-to-swap functionality
+  const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
 
   // calculates the index of the current quote based on the number of days since a 
   // reference date, the grabs the appropriate quote from the quotesData array
@@ -155,6 +166,8 @@ function App() {
     // console.log('New words set:', quotesData[index].words);
   }, []);
 
+  // on each update of the words, check if the words are solved
+  // and update attempts and numberCorrect accordingly
   useEffect(() => {
     // Initialize words or perform any setup logic
     const solvedWords = words.filter(word => word.second === word.original);
@@ -164,11 +177,9 @@ function App() {
     setIsSolved(solvedWords.length === words.length);
   }, [words]);
 
-  // Touch drag state - REMOVED (now using React DnD)
-  // Touch event handlers removed - using React DnD instead
 
   const wordDragged = (button1Index: number, button2Index: number) => {
-    console.log(`Dragged from buttonZZZZ ${button1Index + 1} to button ${button2Index + 1}`);
+    console.log(`Dragged from button ${button1Index + 1} to button ${button2Index + 1}`);
 
     // Swap the second halves of the two buttons
     const newWords = [...words];
@@ -180,6 +191,30 @@ function App() {
       newWords[button2Index].original === newWords[button2Index].second
   );
     setWords(newWords);
+    (document.activeElement as HTMLElement | null)?.blur(); // Remove focus from button after drag
+  };
+
+  // Handle button clicks for alternative interaction method
+  const handleButtonClick = (clickedIndex: number) => {
+    if (selectedButtonIndex === null) {
+      // First click - select the button
+      setSelectedButtonIndex(clickedIndex);
+    } else if (selectedButtonIndex === clickedIndex) {
+      // Clicking the same button again - deselect it
+      setSelectedButtonIndex(null);
+      (document.activeElement as HTMLElement | null)?.blur(); // Remove focus from button after deselect
+    } else {
+      // Second click on different button - perform swap
+      wordDragged(selectedButtonIndex, clickedIndex);
+      setSelectedButtonIndex(null);
+    }
+  };
+
+  // Handle clicks outside buttons to deselect
+  const handleBackgroundClick = () => {
+    if (selectedButtonIndex !== null) {
+      setSelectedButtonIndex(null);
+    }
   };
 
   const wordContent = words.map((word, index) => (
@@ -188,6 +223,8 @@ function App() {
       word={word}
       index={index}
       onWordDragged={wordDragged}
+      onButtonClick={handleButtonClick}
+      isSelected={selectedButtonIndex === index}
     />
   ));
 
@@ -205,12 +242,12 @@ function App() {
 
   return (
     <DndProvider backend={backend}>
-      <div className={`app ${isSolved ? 'solved' : ''}`}>
+      <div className={`app ${isSolved ? 'solved' : ''}`} onClick={handleBackgroundClick}>
       <header className="app-header">
         <h1>
           {isSolved ? 'Congrats!' : 'HAPPLE'}
         </h1>
-        {!isSolved && <p>Drag to rearrange the last half of each word to find the sentence</p>}
+        {!isSolved && <p>Click 2 words (or drag and drop) to swap the last half of each word. <br />Find the hidden quote to win!</p>}
         {isSolved && <p>You have found the sentence!</p>}
       </header>
 
