@@ -425,3 +425,11 @@ footer.app-footer .stats div{
     box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
   }
 }
+
+
+.previous-quote-button{
+  border-radius: 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}

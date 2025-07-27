@@ -81,7 +81,7 @@ function App() {
     const path = wordPath.concat(p);
     setWordPath(path);
 
-    const score = scorePath.concat(b ? '🟩' : '🟥' );
+    const score = scorePath.concat(b ? '🟩' : '🟥');
     setScorePath(score);
     console.log('Word path updated:', path);
   }
@@ -153,7 +153,7 @@ function App() {
   const [attempts, setAttempts] = useState(-2);
   const [numberCorrect, setNumberCorrect] = useState(0);
   const [isSolved, setIsSolved] = useState(false);
-  
+
   // Click-to-swap functionality
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
 
@@ -188,7 +188,7 @@ function App() {
     updateWordPath(
       (newWords[button2Index].first + newWords[button2Index].second),
       newWords[button2Index].original === newWords[button2Index].second
-  );
+    );
     setWords(newWords);
     (document.activeElement as HTMLElement | null)?.blur(); // Remove focus from button after drag
   };
@@ -242,58 +242,63 @@ function App() {
   return (
     <DndProvider backend={backend}>
       <div className={`app ${isSolved ? 'solved' : ''}`} onClick={handleBackgroundClick}>
-      <header className="app-header">
-        <h1>
-          <Birthday />
-          {isSolved ? 'Congrats!' : 'HAPPLE'}
-        </h1>
-        {!isSolved && <p>Click 2 words (or drag and drop) to swap the last half of each word. <br />Find the hidden quote to win!</p>}
-        {isSolved && <p>You have found the sentence!</p>}
-      </header>
+        <header className="app-header">
+          <h1>
+            {!isSolved && 'Happle'}
+            {(isSolved && daysSince() !== 14) && 'Congrats!'}
+            {isSolved && daysSince() === 14 &&
+              <>
+                <Birthday />
+              </>
+            }
+          </h1>
+          {!isSolved && <p>Click 2 words (or drag and drop) to swap the last half of each word. <br />Find the hidden quote to win!</p>}
+          {isSolved && <p>You have found the sentence!</p>}
+        </header>
 
-      <main className="app-main">
-        <div className='sentence-form'>
-          <div className='word-buttons'>
-            {wordContent}
-            {isSolved && <span className='author'>― {author}</span>}
+        <main className="app-main">
+          <div className='sentence-form'>
+            <div className='word-buttons'>
+              {wordContent}
+              {isSolved && <span className='author'>― {author}</span>}
+            </div>
           </div>
-        </div>
 
 
-      </main>
-      <footer className="app-footer">
+        </main>
+        <footer className="app-footer">
 
-        <div className='stats'>
-          <div><span>Attempt: </span><span className='badge'>{attempts + 1}</span></div>
-          <div><span>Correct: </span><span className='badge'>{numberCorrect}</span></div>
+          <div className='stats'>
+            <div><span>Attempt: </span><span className='badge'>{attempts + 1}</span></div>
+            <div><span>Correct: </span><span className='badge'>{numberCorrect}</span></div>
 
 
 
-        </div>
+          </div>
 
-        {isSolved && <div className='share-button'>
-          <span className='badge' onClick={copyScore}>
-            <FontAwesomeIcon icon="share" /> SHARE
-          </span>
-          <span className={`badge copied-overlay ${showCopiedOverlay ? 'show' : ''}`}>
-            <FontAwesomeIcon icon="check" /> SCORE COPIED!
-          </span>
-        </div>}
-        {/* <div className='date-button'>`
+          {isSolved && <div className='share-button'>
+            <span className='badge' onClick={copyScore}>
+              <FontAwesomeIcon icon="share" /> SHARE
+            </span>
+            <span className={`badge copied-overlay ${showCopiedOverlay ? 'show' : ''}`}>
+              <FontAwesomeIcon icon="check" /> SCORE COPIED!
+            </span>
+          </div>}
+          {/* <div className='date-button'>`
           {daysSince() % quotesData.length !== 0 && (
             <button onClick={handlePreviousQuote} className='text-button'>Previous puzzle</button>
           )}
         </div> */}
-      </footer>
-      <div className='footer-date'>
-        {new Date().toLocaleDateString('de-AT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Europe/Vienna' })}
-        {/* {new Date().toDateString()} */}
-      </div>
-      {window.location.hash === '#admin' && <Generate />}
-      {isSolved && <Confetti />}
+        </footer>
+        <div className='footer-date'>
+          {new Date().toLocaleDateString('de-AT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Europe/Vienna' })}
+          {/* {new Date().toDateString()} */}
+        </div>
+        {window.location.hash === '#admin' && <Generate />}
+        {isSolved && <Confetti />}
       </div>
       <button className='previous-quote-button' onClick={handlePreviousQuote}>
-        <FontAwesomeIcon icon="arrow-left" /> Previous Quote
+        <FontAwesomeIcon icon="arrow-left" /> Previous Quote 
       </button>
     </DndProvider>
   );

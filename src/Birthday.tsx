@@ -39,13 +39,6 @@ const BirthdayCakeSVG = () => (
     <rect x='40' y='70' width='120' height='65' rx='20' fill="#f04dd7"  strokeWidth='3' />
     <ellipse cx='100' cy='80' rx='60' ry='20' fill="#fffddd"  />
     
-    {/* Cake base */}
-    {/* <ellipse cx={100} cy={120} rx={60} ry={30} fill="#f9c9a3" stroke="#d2a679" strokeWidth={3} /> */}
-    {/* Cake body */}
-    {/* <rect x={40} y={70} width={120} height={50} rx={20} fill="#ffe5b4" stroke="#d2a679" strokeWidth={3} /> */}
-    {/* Cake top */}
-    {/* <ellipse cx={100} cy={70} rx={60} ry={20} fill="#fff" stroke="#d2a679" strokeWidth={2} /> */}
-    {/* Candles */}
     <Candle x={70} />
     <Candle x={100} />
     <Candle x={130} />
@@ -55,8 +48,8 @@ const BirthdayCakeSVG = () => (
 const Birthday: React.FC = () => (
   <div style={{ textAlign: "center", marginTop: 40 }}>
     <BirthdayCakeSVG />
-    <h2 style={{ color: "#FF69B4", marginTop: 20, fontFamily: "cursive", letterSpacing: 2 }}>
-      HAPPY BIRTHDAY ROBIN!
+    <h2 style={{ color: "#535bf2", marginTop: '-10px', letterSpacing: 2, fontSize: '2rem' }}>
+      Congrats!
     </h2>
   </div>
 );

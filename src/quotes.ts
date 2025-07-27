@@ -205,16 +205,17 @@ export const quotesData = [
   },
   {
     id: 14,
-    author: 'Gurney Halleck',
-    quote: 'If wishes were fishes we’d all cast nets',
-    words: [{ first: 'I', second: 'hes', original: 'f' },
-    { first: 'wis', second: '’d', original: 'hes' },
-    { first: 'we', second: 'l', original: 're' },
-    { first: 'fis', second: 'ts', original: 'hes' },
-    { first: 'we', second: 'hes', original: '’d' },
-    { first: 'al', second: 'st', original: 'l' },
-    { first: 'ca', second: 'f', original: 'st' },
-    { first: 'ne', second: 're', original: 'ts' }]
+    author: 'Robin Stricklin',
+    quote: 'The best thing about Krystal is the conversation before',
+    words: [{ first: 'Th', second: 'ut', original: 'e' },
+    { first: 'be', second: 'ng', original: 'st' },
+    { first: 'thi', second: 'e', original: 'ng' },
+    { first: 'abo', second: 'sation', original: 'ut' },
+    { first: 'Krys', second: 'e', original: 'tal' },
+    { first: 'i', second: 'tal', original: 's' },
+    { first: 'th', second: 'st', original: 'e' },
+    { first: 'conver', second: 'ore', original: 'sation' },
+    { first: 'bef', second: 's', original: 'ore' }]
   },
   {
     id: 15,
@@ -332,11 +333,16 @@ export const quotesData = [
 
 // This function calculates the number of days since July 14, 2025
 export function daysSince(): number {
+  console.log('Calculating days since July 14, 2025');
   // Austrian time zone is Europe/Vienna (UTC+1/+2)
-  const startDate = new Date('2025-07-14T00:00:00+02:00'); // July 13, 2025 at midnight Vienna time
+  // const startDate = new Date('2025-07-14T00:00:00+02:00'); // July 13, 2025 at midnight Vienna time
+  const startDate = new Date('2025-07-14T05:00:00-06:00'); // July 14 at midnight Chicago time
   const now = new Date();
   // Convert both dates to Vienna time
-  const viennaNow = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Vienna' }));
-  const diffTime = viennaNow.getTime() - startDate.getTime();
-  return Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  // const viennaNow = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Vienna' }));
+  const centralNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  const diffTime = centralNow.getTime() - startDate.getTime();
+  const count = diffTime / (1000 * 60 * 60 * 24);
+  console.log(`Days since: ${count}`);
+  return Math.floor(count);
 }
