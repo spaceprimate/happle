@@ -9,6 +9,7 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { useDrag, useDrop } from 'react-dnd';
+import Birthday from './Birthday';
 
 const ItemType = 'WORD_HALF';
 
@@ -122,7 +123,7 @@ function App() {
     }
   };
 
-  // const [dateOffset, setDateOffset] = useState(quotesData[daysSince() % quotesData.length].words);
+  const [dateOffset, setDateOffset] = useState<number>(0);
   // console.log('days since:', daysSince() % quotesData.length);
 
   // console.log('words:', quotesData);
@@ -139,11 +140,9 @@ function App() {
   //   { first: 'vag', second: 'd,', original: 'ue' }
   // ]);
 
-  // const handlePreviousQuote = () => {
-  //   setDateOffset(dateOffset - 1);
-  //   setWords(quotesData[dateOffset].words);
-  //   console.log('Previous quote words:', index);
-  // }
+  const handlePreviousQuote = () => {
+    setDateOffset(dateOffset + 1);
+  }
 
   // const handleNextQuote = () => {
   //   const index = (daysSince() + 1) % quotesData.length;
@@ -161,10 +160,10 @@ function App() {
   // calculates the index of the current quote based on the number of days since a 
   // reference date, the grabs the appropriate quote from the quotesData array
   useEffect(() => {
-    const index = daysSince() % quotesData.length;
+    const index = (daysSince() - dateOffset) % quotesData.length;
     setWords(quotesData[index].words);
     // console.log('New words set:', quotesData[index].words);
-  }, []);
+  }, [dateOffset]);
 
   // on each update of the words, check if the words are solved
   // and update attempts and numberCorrect accordingly
@@ -245,6 +244,7 @@ function App() {
       <div className={`app ${isSolved ? 'solved' : ''}`} onClick={handleBackgroundClick}>
       <header className="app-header">
         <h1>
+          <Birthday />
           {isSolved ? 'Congrats!' : 'HAPPLE'}
         </h1>
         {!isSolved && <p>Click 2 words (or drag and drop) to swap the last half of each word. <br />Find the hidden quote to win!</p>}
@@ -292,6 +292,9 @@ function App() {
       {window.location.hash === '#admin' && <Generate />}
       {isSolved && <Confetti />}
       </div>
+      <button className='previous-quote-button' onClick={handlePreviousQuote}>
+        <FontAwesomeIcon icon="arrow-left" /> Previous Quote
+      </button>
     </DndProvider>
   );
 }
