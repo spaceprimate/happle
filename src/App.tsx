@@ -71,7 +71,8 @@ const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged, onBut
 
 function App() {
   const [words, setWords] = useState(quotesData[daysSince() % quotesData.length].words);
-  const author = quotesData[daysSince() % quotesData.length].author;
+  // const author = quotesData[daysSince() % quotesData.length].author;
+  const [author, setAuthor] = useState(quotesData[daysSince() % quotesData.length].author);
 
   const [wordPath, setWordPath] = useState<string[]>([]);
   const [scorePath, setScorePath] = useState<string[]>([]);
@@ -162,6 +163,7 @@ function App() {
   useEffect(() => {
     const index = (daysSince() - dateOffset) % quotesData.length;
     setWords(quotesData[index].words);
+    setAuthor(quotesData[index].author);
     // console.log('New words set:', quotesData[index].words);
   }, [dateOffset]);
 
