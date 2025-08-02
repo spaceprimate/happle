@@ -1,0 +1,25 @@
+const quotes = [
+  {quote: `Love is what you've been through with somebody.`, author: `James Thurber`},
+  {quote: `It ain't the heat, it's the humility.`, author: `Yogi Berra`},
+  {quote: `They talk of the dignity of work. The dignity is in leisure.`, author: `Herman Melville`},
+  {quote: `If life gives you limes, make margaritas.`, author: `Jimmy Buffet`},
+  {quote: `Storms make trees take deeper roots.`, author: `Dolly Parton`},
+  {quote: `Maybe I can find the truth by comparing the lies`, author: `Leon Trotsky`},
+  {quote: `Sooner or later we're all someone's dog.`, author: `Terry Pratchett`},
+  {quote: `To be or not to be. That's not really a question.`, author: `Jean-Luc Godard`},
+  {quote: `In the beginning there was nothing, which exploded.`, author: `Terry Pratchett`},
+  {quote: `What's missing from pop music is danger.`, author: `Prince`},
+  {quote: `only time will tell if we stand the test of time`, author: `Eddie Van Halen`},
+  {quote: `Sneaking up like Celery, yeah I'm stalkin`, author: `Vanilla Ice`},
+  {quote: `Nobody goes there anymore. It's too crowded.`, author: `Yogi Berra`},
+  {quote: `There's nothing like white trash at the White House.`, author: `Dolly Parton`},
+  {quote: `I love Mickey Mouse more than any woman I have ever known.`, author: `Walt Disney`},
+  {quote: `Maybe you think I'm a pervert but it is really boring at work`, author: `Robin Stricklin`},
+  {quote: `Thank God I'm an atheist.`, author: `Luis Bunuel`},
+  {quote: `I can resist everything except temptation`, author: `Oscar Wilde`},
+  {quote: `the Quest for the truth had been born in me`, author: `Ida tarbell`},
+  {quote: `Revolutions are always verbose.`, author: `Leon Trotsky`},
+  {quote: `You can't die with an unfinished book.`, author: `Terry Pratchett`},
+];
+
+export default quotes;
