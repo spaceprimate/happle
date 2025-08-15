@@ -1,8 +1,31 @@
+#root{
+  min-height: 100vh;
+}
+
 .app {
   max-width: 800px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+.app-nav{
+  background: #1a1a1a;
+  padding: 0;
+  min-height: 50px;
+}
+
+.app-nav h1{
+  font-size: 15pt;
+  margin: 0;
+  padding: 14px 0 0 14px;
+}
+
+#app-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
 .app-header {
@@ -285,19 +308,19 @@ body.touch-dragging {
   height: 100%;
 }
 
-footer.app-footer{
+footer.game-footer{
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-footer.app-footer .stats{
+footer.game-footer .stats{
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-footer.app-footer .stats .badge{
+footer.game-footer .stats .badge{
   display: inline-block;
   padding: 0 0.5rem;
   background-color: #404aca;
@@ -308,7 +331,7 @@ footer.app-footer .stats .badge{
   height: 1.2rem;
 }
 
-footer.app-footer .stats div{
+footer.game-footer .stats div{
   color: #ddd;
   display: flex;
   gap: 0.5rem;
@@ -429,7 +452,8 @@ footer.app-footer .stats div{
 
 .previous-quote-button{
   border-radius: 0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+}
+
+.muted{
+  color: #999;
 }

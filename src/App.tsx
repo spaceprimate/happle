@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Generate from './Generate';
 import Confetti from './Confetti';
-import { daysSince, quotesData } from './quotes';
+import { calculateDaysSince, calculateNextDate, calculatePrevDate, daysSince, quotesData } from './quotes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './fontawesome';
 import { DndProvider } from 'react-dnd';
@@ -10,6 +10,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { useDrag, useDrop } from 'react-dnd';
 import Birthday from './Birthday';
+import Modal from './Modal';
+import ModalInstructions from './ModalInstructions';
 
 const ItemType = 'WORD_HALF';
 
@@ -77,6 +79,23 @@ function App() {
   const [wordPath, setWordPath] = useState<string[]>([]);
   const [scorePath, setScorePath] = useState<string[]>([]);
   const [showCopiedOverlay, setShowCopiedOverlay] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
+
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentIndex, setCurrentIndex] = useState(calculateDaysSince(currentDate) % quotesData.length);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  }
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const resetPaths = () => {
+    setWordPath([]);
+    setScorePath([]);
+    setAttempts(-2);
+  }
 
   const updateWordPath = (p: string, b: boolean) => {
     const path = wordPath.concat(p);
@@ -84,7 +103,6 @@ function App() {
 
     const score = scorePath.concat(b ? '🟩' : '🟥');
     setScorePath(score);
-    console.log('Word path updated:', path);
   }
 
   const copyScore = () => {
@@ -94,12 +112,10 @@ function App() {
     //   wordPath,
     // };
     const text = `H🍏 - Solved in ${attempts + 1}!\n` + scorePath.join(' ');
-    // console.log(scorePath)
     // const text = JSON.stringify(scoreData, null, 2);
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text)
         .then(() => {
-          // console.log('Score copied to clipboard');
           setShowCopiedOverlay(true);
           setTimeout(() => setShowCopiedOverlay(false), 2000);
         })
@@ -112,7 +128,6 @@ function App() {
       textarea.select();
       try {
         document.execCommand('copy');
-        console.log('Score copied to clipboard');
         setShowCopiedOverlay(true);
         setTimeout(() => setShowCopiedOverlay(false), 2000);
       } catch (err) {
@@ -124,32 +139,22 @@ function App() {
     }
   };
 
-  const [dateOffset, setDateOffset] = useState<number>(0);
-  // console.log('days since:', daysSince() % quotesData.length);
-
-  // console.log('words:', quotesData);
-
-  // const [words, setWords] = useState([
-  //   { first: 'I', second: 'u', original: 'f' },
-  //   { first: 'yo', second: 't', original: 'u' },
-  //   { first: 'can', second: 'e', original: 't' },
-  //   { first: 'b', second: 'f', original: 'e' },
-  //   { first: 'kin', second: 'e', original: 'd,' },
-  //   { first: 'a', second: 'ue', original: 't' },
-  //   { first: 'lea', second: 't', original: 'st' },
-  //   { first: 'b', second: 'st', original: 'e' },
-  //   { first: 'vag', second: 'd,', original: 'ue' }
-  // ]);
+  // const [dateOffset, setDateOffset] = useState<number>(0);
 
   const handlePreviousQuote = () => {
-    setDateOffset(dateOffset + 1);
+    // setDateOffset(dateOffset + 1);
+    setCurrentDate(calculatePrevDate(currentDate));
+    setCurrentIndex((currentIndex - 1 + quotesData.length) % quotesData.length);
+    resetPaths();
   }
 
-  // const handleNextQuote = () => {
-  //   const index = (daysSince() + 1) % quotesData.length;
-  //   setWords(quotesData[index].words);
-  //   console.log('Next quote words:', quotesData[index].words);
-  // }
+  const handleNextQuote = () => {
+    // setDateOffset(dateOffset - 1);
+    setCurrentDate(calculateNextDate(currentDate));
+    setCurrentIndex((currentIndex + 1) % quotesData.length);
+    resetPaths();
+  }
+
 
   const [attempts, setAttempts] = useState(-2);
   const [numberCorrect, setNumberCorrect] = useState(0);
@@ -158,21 +163,28 @@ function App() {
   // Click-to-swap functionality
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    console.log(`Current Date: ${currentDate}, Current Index: ${currentIndex}`);
+    console.log(quotesData[currentIndex]);
+
+
+    const testDate = new Date(2025, 6, 14); // July is month 6 (0-based)
+    console.log(testDate, calculateDaysSince(testDate), quotesData[calculateDaysSince(testDate)]);
+  }, [currentDate]);
+
   // calculates the index of the current quote based on the number of days since a 
   // reference date, the grabs the appropriate quote from the quotesData array
   useEffect(() => {
-    const index = (daysSince() - dateOffset) % quotesData.length;
-    setWords(quotesData[index].words);
-    setAuthor(quotesData[index].author);
-    // console.log('New words set:', quotesData[index].words);
-  }, [dateOffset]);
+    // const index = (daysSince() - dateOffset) % quotesData.length;
+    setWords(quotesData[currentIndex].words);
+    setAuthor(quotesData[currentIndex].author);
+  }, [currentIndex]);
 
   // on each update of the words, check if the words are solved
   // and update attempts and numberCorrect accordingly
   useEffect(() => {
     // Initialize words or perform any setup logic
     const solvedWords = words.filter(word => word.second === word.original);
-    // console.log('Solved words:', solvedWords);
     setAttempts(attempts + 1);
     setNumberCorrect(solvedWords.length);
     setIsSolved(solvedWords.length === words.length);
@@ -180,7 +192,6 @@ function App() {
 
 
   const wordDragged = (button1Index: number, button2Index: number) => {
-    console.log(`Dragged from button ${button1Index + 1} to button ${button2Index + 1}`);
 
     // Swap the second halves of the two buttons
     const newWords = [...words];
@@ -231,7 +242,7 @@ function App() {
 
 
 
-
+  console.log(calculateDaysSince(new Date()));
 
   // Detect if touch device
   const isTouchDevice = () => {
@@ -243,65 +254,73 @@ function App() {
 
   return (
     <DndProvider backend={backend}>
-      <div className={`app ${isSolved ? 'solved' : ''}`} onClick={handleBackgroundClick}>
-        <header className="app-header">
-          <h1>
-            {!isSolved && 'Happle'}
-            {(isSolved && daysSince() !== 14) && 'Congrats!'}
-            {isSolved && daysSince() === 14 &&
-              <>
-                <Birthday />
-              </>
-            }
+      <div id='app-wrapper' className={`app-wrapper ${isSolved ? 'solved' : ''}`}>
+        <nav className='app-nav'>
+          <h1 className='app-title'>
+              HAPPLE #{currentIndex} <span className='muted'>{currentDate.toDateString()}</span>
+            {/* {(isSolved && (daysSince() !== 14 && daysSince() !== 13)) && 'Congrats!'} */}
+
           </h1>
-          {!isSolved && <p>Click 2 words (or drag and drop) to swap the last half of each word. <br />Find the hidden quote to win!</p>}
+
+
+          <Modal show={isModalOpen} onClose={handleCloseModal}>
+            <ModalInstructions onConfirm={handleCloseModal} />
+          </Modal>
           {isSolved && <p>You have found the sentence!</p>}
-        </header>
 
-        <main className="app-main">
-          <div className='sentence-form'>
-            <div className='word-buttons'>
-              {wordContent}
-              {isSolved && <span className='author'>― {author}</span>}
+        </nav>
+        <div className={`app ${isSolved ? 'solved' : ''}`} onClick={handleBackgroundClick}>
+
+          <main className="game">
+            <div className='sentence-form'>
+              <div className='word-buttons'>
+                {wordContent}
+                {isSolved && <span className='author'>― {author}</span>}
+              </div>
             </div>
-          </div>
 
+          </main>
+          <footer className="game-footer">
 
-        </main>
-        <footer className="app-footer">
-
-          <div className='stats'>
-            <div><span>Attempt: </span><span className='badge'>{attempts + 1}</span></div>
-            <div><span>Correct: </span><span className='badge'>{numberCorrect}</span></div>
+            <div className='stats'>
+              <div><span>Attempt: </span><span className='badge'>{attempts + 1}</span></div>
+              <div><span>Correct: </span><span className='badge'>{numberCorrect}</span></div>
 
 
 
-          </div>
+            </div>
 
-          {isSolved && <div className='share-button'>
-            <span className='badge' onClick={copyScore}>
-              <FontAwesomeIcon icon="share" /> SHARE
-            </span>
-            <span className={`badge copied-overlay ${showCopiedOverlay ? 'show' : ''}`}>
-              <FontAwesomeIcon icon="check" /> SCORE COPIED!
-            </span>
-          </div>}
-          {/* <div className='date-button'>`
+            {isSolved && <div className='share-button'>
+              <span className='badge' onClick={copyScore}>
+                <FontAwesomeIcon icon="share" /> SHARE
+              </span>
+              <span className={`badge copied-overlay ${showCopiedOverlay ? 'show' : ''}`}>
+                <FontAwesomeIcon icon="check" /> SCORE COPIED!
+              </span>
+            </div>}
+            {/* <div className='date-button'>`
           {daysSince() % quotesData.length !== 0 && (
             <button onClick={handlePreviousQuote} className='text-button'>Previous puzzle</button>
           )}
         </div> */}
-        </footer>
-        <div className='footer-date'>
-          {new Date().toLocaleDateString('de-AT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Europe/Vienna' })}
-          {/* {new Date().toDateString()} */}
+          </footer>
+          <div className='footer-date'>
+            {new Date().toLocaleDateString('de-AT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Europe/Vienna' })}
+            {/* {new Date().toDateString()} */}
+          </div>
+          {window.location.hash === '#admin' && <Generate />}
+          {window.location.hash === '#test' &&
+            <button className='next-quote-button' onClick={handleNextQuote}>
+              <FontAwesomeIcon icon="arrow-right" /> Next Quote
+            </button>
+          }
+          {isSolved && <Confetti />}
         </div>
-        {window.location.hash === '#admin' && <Generate />}
-        {isSolved && <Confetti />}
+
+        <button className='previous-quote-button' onClick={handlePreviousQuote}>
+          <FontAwesomeIcon icon="arrow-left" /> Previous Quote
+        </button>
       </div>
-      <button className='previous-quote-button' onClick={handlePreviousQuote}>
-        <FontAwesomeIcon icon="arrow-left" /> Previous Quote 
-      </button>
     </DndProvider>
   );
 }

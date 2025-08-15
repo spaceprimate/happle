@@ -215,7 +215,7 @@ function App() {
         {isSolved && <p>You have found the sentence!</p>}
       </header>
 
-      <main className="app-main">
+      <main className="game">
         <div className='sentence-form'>
           <div className='word-buttons'>
             {wordContent}
@@ -225,7 +225,7 @@ function App() {
 
 
       </main>
-      <footer className="app-footer">
+      <footer className="game-footer">
 
         <div className='stats'>
           <div><span>Attempt: </span><span className='badge'>{attempts + 1}</span></div>

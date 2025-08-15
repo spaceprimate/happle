@@ -288,17 +288,20 @@ export const quotesData = [
   {
     id: 20,
     author: 'Samantha Irby',
-    quote: 'First of all, why you would ask a man anything',
-    words: [{ first: 'Fir', second: 'ld', original: 'st' },
-    { first: 'o', second: 'u', original: 'f' },
-    { first: 'al', second: 'k', original: 'l,' },
-    { first: 'wh', second: 'n', original: 'y' },
-    { first: 'yo', second: 'st', original: 'u' },
-    { first: 'wou', second: 'hing', original: 'ld' },
-    { first: 'as', second: 'f', original: 'k' },
-    { first: 'a', second: 'l,', original: '' },
-    { first: 'ma', second: '', original: 'n' },
-    { first: 'anyt', second: 'y', original: 'hing' }]
+    quote: 'First of all, why you would ask a man anything is beyond me',
+    words: [{ first: 'Fir', second: 'l,', original: 'st' },
+    { first: 'o', second: 'ld', original: 'f' },
+    { first: 'al', second: 'y', original: 'l,' },
+    { first: 'wh', second: '', original: 'y' },
+    { first: 'yo', second: 'f', original: 'u' },
+    { first: 'wou', second: 'ond', original: 'ld' },
+    { first: 'as', second: 'u', original: 'k' },
+    { first: 'a', second: 'k', original: '' },
+    { first: 'ma', second: 'e', original: 'n' },
+    { first: 'anyt', second: 's', original: 'hing' },
+    { first: 'i', second: 'st', original: 's' },
+    { first: 'bey', second: 'n', original: 'ond' },
+    { first: 'm', second: 'hing', original: 'e' }]
   },
   {
     id: 21,
@@ -326,14 +329,1042 @@ export const quotesData = [
     { first: 'lo', second: 'me', original: 've' }]
   },
 
+  {
+    id: 23,
+    words: [
+      {
+        first: "Lo",
+        second: "at",
+        original: "ve"
+      },
+      {
+        first: "i",
+        second: "ve",
+        original: "s"
+      },
+      {
+        first: "wh",
+        second: "th",
+        original: "at"
+      },
+      {
+        first: "you",
+        second: "ody.",
+        original: "’ve"
+      },
+      {
+        first: "be",
+        second: "’ve",
+        original: "en"
+      },
+      {
+        first: "thro",
+        second: "en",
+        original: "ugh"
+      },
+      {
+        first: "wi",
+        second: "ugh",
+        original: "th"
+      },
+      {
+        first: "someb",
+        second: "s",
+        original: "ody."
+      }
+    ],
+    quote: "Love is what you’ve been through with somebody.",
+    author: "James Thurber"
+  },
+  {
+    id: 24,
+    words: [
+      {
+        first: "I",
+        second: "ity.",
+        original: "t"
+      },
+      {
+        first: "ain",
+        second: "e",
+        original: "’t"
+      },
+      {
+        first: "th",
+        second: "’s",
+        original: "e"
+      },
+      {
+        first: "hea",
+        second: "t",
+        original: "t,"
+      },
+      {
+        first: "it",
+        second: "t,",
+        original: "’s"
+      },
+      {
+        first: "th",
+        second: "’t",
+        original: "e"
+      },
+      {
+        first: "humil",
+        second: "e",
+        original: "ity."
+      }
+    ],
+    quote: "It ain’t the heat, it’s the humility.",
+    author: "Yogi Berra"
+  },
+  {
+    id: 25,
+    words: [
+      {
+        first: "Th",
+        second: "e",
+        original: "ey"
+      },
+      {
+        first: "ta",
+        second: "ity",
+        original: "lk"
+      },
+      {
+        first: "o",
+        second: "lk",
+        original: "f"
+      },
+      {
+        first: "th",
+        second: "ity",
+        original: "e"
+      },
+      {
+        first: "dign",
+        second: "ey",
+        original: "ity"
+      },
+      {
+        first: "o",
+        second: "e",
+        original: "f"
+      },
+      {
+        first: "wor",
+        second: "f",
+        original: "k."
+      },
+      {
+        first: "Th",
+        second: "f",
+        original: "e"
+      },
+      {
+        first: "dign",
+        second: "s",
+        original: "ity"
+      },
+      {
+        first: "i",
+        second: "ure.",
+        original: "s"
+      },
+      {
+        first: "i",
+        second: "k.",
+        original: "n"
+      },
+      {
+        first: "leis",
+        second: "n",
+        original: "ure."
+      }
+    ],
+    quote: "They talk of the dignity of work. The dignity is in leisure.",
+    author: "Herman Melville"
+  },
+  {
+    id: 26,
+    words: [
+      {
+        first: "I",
+        second: "u",
+        original: "f"
+      },
+      {
+        first: "li",
+        second: "ke",
+        original: "fe"
+      },
+      {
+        first: "giv",
+        second: "fe",
+        original: "es"
+      },
+      {
+        first: "yo",
+        second: "es",
+        original: "u"
+      },
+      {
+        first: "lim",
+        second: "f",
+        original: "es,"
+      },
+      {
+        first: "ma",
+        second: "itas.",
+        original: "ke"
+      },
+      {
+        first: "margar",
+        second: "es,",
+        original: "itas."
+      }
+    ],
+    quote: "If life gives you limes, make margaritas.",
+    author: "Jimmy Buffet"
+  },
+  {
+    id: 27,
+    words: [
+      {
+        first: "Sto",
+        second: "per",
+        original: "rms"
+      },
+      {
+        first: "ma",
+        second: "rms",
+        original: "ke"
+      },
+      {
+        first: "tre",
+        second: "ke",
+        original: "es"
+      },
+      {
+        first: "ta",
+        second: "ts.",
+        original: "ke"
+      },
+      {
+        first: "dee",
+        second: "ke",
+        original: "per"
+      },
+      {
+        first: "roo",
+        second: "es",
+        original: "ts."
+      }
+    ],
+    quote: "Storms make trees take deeper roots.",
+    author: "Dolly Parton"
+  },
+  {
+    id: 28,
+    words: [
+      {
+        first: "May",
+        second: "nd",
+        original: "be"
+      },
+      {
+        first: "I",
+        second: "th",
+        original: ""
+      },
+      {
+        first: "ca",
+        second: "y",
+        original: "n"
+      },
+      {
+        first: "fi",
+        second: "e",
+        original: "nd"
+      },
+      {
+        first: "th",
+        second: "n",
+        original: "e"
+      },
+      {
+        first: "tru",
+        second: "e",
+        original: "th"
+      },
+      {
+        first: "b",
+        second: "ring",
+        original: "y"
+      },
+      {
+        first: "compa",
+        second: "be",
+        original: "ring"
+      },
+      {
+        first: "th",
+        second: "es",
+        original: "e"
+      },
+      {
+        first: "li",
+        second: "",
+        original: "es"
+      }
+    ],
+    quote: "Maybe I can find the truth by comparing the lies",
+    author: "Leon Trotsky"
+  },
+  {
+    id: 29,
+    words: [
+      {
+        first: "Soo",
+        second: "er",
+        original: "ner"
+      },
+      {
+        first: "o",
+        second: "l",
+        original: "r"
+      },
+      {
+        first: "lat",
+        second: "r",
+        original: "er"
+      },
+      {
+        first: "we’",
+        second: "ne’s",
+        original: "re"
+      },
+      {
+        first: "al",
+        second: "g.",
+        original: "l"
+      },
+      {
+        first: "someo",
+        second: "ner",
+        original: "ne’s"
+      },
+      {
+        first: "do",
+        second: "re",
+        original: "g."
+      }
+    ],
+    quote: "Sooner or later we’re all someone’s dog.",
+    author: "Terry Pratchett"
+  },
+  {
+    id: 30,
+    words: [
+      {
+        first: "T",
+        second: "t",
+        original: "o"
+      },
+      {
+        first: "b",
+        second: "t’s",
+        original: "e"
+      },
+      {
+        first: "o",
+        second: "lly",
+        original: "r"
+      },
+      {
+        first: "no",
+        second: "e",
+        original: "t"
+      },
+      {
+        first: "t",
+        second: "r",
+        original: "o"
+      },
+      {
+        first: "be",
+        second: "o",
+        original: "."
+      },
+      {
+        first: "Tha",
+        second: "t",
+        original: "t’s"
+      },
+      {
+        first: "no",
+        second: "o",
+        original: "t"
+      },
+      {
+        first: "rea",
+        second: "",
+        original: "lly"
+      },
+      {
+        first: "a",
+        second: "ion.",
+        original: ""
+      },
+      {
+        first: "quest",
+        second: ".",
+        original: "ion."
+      }
+    ],
+    quote: "To be or not to be. That’s not really a question.",
+    author: "Jean-Luc Godard"
+  },
+  {
+    id: 31,
+    words: [
+      {
+        first: "I",
+        second: "ning",
+        original: "n"
+      },
+      {
+        first: "th",
+        second: "n",
+        original: "e"
+      },
+      {
+        first: "begin",
+        second: "ing,",
+        original: "ning"
+      },
+      {
+        first: "the",
+        second: "ch",
+        original: "re"
+      },
+      {
+        first: "wa",
+        second: "ded.",
+        original: "s"
+      },
+      {
+        first: "noth",
+        second: "re",
+        original: "ing,"
+      },
+      {
+        first: "whi",
+        second: "s",
+        original: "ch"
+      },
+      {
+        first: "explo",
+        second: "e",
+        original: "ded."
+      }
+    ],
+    quote: "In the beginning there was nothing, which exploded.",
+    author: "Terry Pratchett"
+  },
+  {
+    id: 32,
+    words: [
+      {
+        first: "Wha",
+        second: "om",
+        original: "t’s"
+      },
+      {
+        first: "miss",
+        second: "p",
+        original: "ing"
+      },
+      {
+        first: "fr",
+        second: "ic",
+        original: "om"
+      },
+      {
+        first: "po",
+        second: "t’s",
+        original: "p"
+      },
+      {
+        first: "mus",
+        second: "er.",
+        original: "ic"
+      },
+      {
+        first: "i",
+        second: "ing",
+        original: "s"
+      },
+      {
+        first: "dang",
+        second: "s",
+        original: "er."
+      }
+    ],
+    quote: "What’s missing from pop music is danger.",
+    author: "Prince"
+  },
+  {
+    id: 33,
+    words: [
+      {
+        first: "on",
+        second: "me",
+        original: "ly"
+      },
+      {
+        first: "ti",
+        second: "ll",
+        original: "me"
+      },
+      {
+        first: "wi",
+        second: "f",
+        original: "ll"
+      },
+      {
+        first: "te",
+        second: "ly",
+        original: "ll"
+      },
+      {
+        first: "i",
+        second: "nd",
+        original: "f"
+      },
+      {
+        first: "w",
+        second: "st",
+        original: "e"
+      },
+      {
+        first: "sta",
+        second: "ll",
+        original: "nd"
+      },
+      {
+        first: "th",
+        second: "me",
+        original: "e"
+      },
+      {
+        first: "te",
+        second: "e",
+        original: "st"
+      },
+      {
+        first: "o",
+        second: "e",
+        original: "f"
+      },
+      {
+        first: "ti",
+        second: "f",
+        original: "me"
+      }
+    ],
+    quote: "only time will tell if we stand the test of time",
+    author: "Eddie Van Halen"
+  },
+  {
+    id: 34,
+    words: [
+      {
+        first: "Snea",
+        second: "ah",
+        original: "king"
+      },
+      {
+        first: "u",
+        second: "king",
+        original: "p"
+      },
+      {
+        first: "li",
+        second: "p",
+        original: "ke"
+      },
+      {
+        first: "Cele",
+        second: "ke",
+        original: "ry,"
+      },
+      {
+        first: "ye",
+        second: "m",
+        original: "ah"
+      },
+      {
+        first: "I’",
+        second: "kin",
+        original: "m"
+      },
+      {
+        first: "stal",
+        second: "ry,",
+        original: "kin"
+      }
+    ],
+    quote: "Sneaking up like Celery, yeah I’m stalkin",
+    author: "Vanilla Ice"
+  },
+  {
+    id: 35,
+    words: [
+      {
+        first: "Nob",
+        second: "’s",
+        original: "ody"
+      },
+      {
+        first: "go",
+        second: "ody",
+        original: "es"
+      },
+      {
+        first: "the",
+        second: "es",
+        original: "re"
+      },
+      {
+        first: "anym",
+        second: "re",
+        original: "ore."
+      },
+      {
+        first: "It",
+        second: "o",
+        original: "’s"
+      },
+      {
+        first: "to",
+        second: "ded.",
+        original: "o"
+      },
+      {
+        first: "crow",
+        second: "ore.",
+        original: "ded."
+      }
+    ],
+    quote: "Nobody goes there anymore. It’s too crowded.",
+    author: "Yogi Berra"
+  },
+  {
+    id: 36,
+    words: [
+      {
+        first: "Ther",
+        second: "te",
+        original: "e’s"
+      },
+      {
+        first: "noth",
+        second: "te",
+        original: "ing"
+      },
+      {
+        first: "li",
+        second: "e",
+        original: "ke"
+      },
+      {
+        first: "whi",
+        second: "sh",
+        original: "te"
+      },
+      {
+        first: "tra",
+        second: "ke",
+        original: "sh"
+      },
+      {
+        first: "a",
+        second: "e’s",
+        original: "t"
+      },
+      {
+        first: "th",
+        second: "ing",
+        original: "e"
+      },
+      {
+        first: "Whi",
+        second: "se.",
+        original: "te"
+      },
+      {
+        first: "Hou",
+        second: "t",
+        original: "se."
+      }
+    ],
+    quote: "There’s nothing like white trash at the White House.",
+    author: "Dolly Parton"
+  },
+  {
+    id: 37,
+    words: [
+      {
+        first: "I",
+        second: "an",
+        original: ""
+      },
+      {
+        first: "lo",
+        second: "se",
+        original: "ve"
+      },
+      {
+        first: "Mic",
+        second: "y",
+        original: "key"
+      },
+      {
+        first: "Mou",
+        second: "",
+        original: "se"
+      },
+      {
+        first: "mo",
+        second: "key",
+        original: "re"
+      },
+      {
+        first: "th",
+        second: "er",
+        original: "an"
+      },
+      {
+        first: "an",
+        second: "ve",
+        original: "y"
+      },
+      {
+        first: "wom",
+        second: "wn.",
+        original: "an"
+      },
+      {
+        first: "I",
+        second: "ve",
+        original: ""
+      },
+      {
+        first: "ha",
+        second: "",
+        original: "ve"
+      },
+      {
+        first: "ev",
+        second: "re",
+        original: "er"
+      },
+      {
+        first: "kno",
+        second: "an",
+        original: "wn."
+      }
+    ],
+    quote: "I love Mickey Mouse more than any woman I have ever known.",
+    author: "Walt Disney"
+  },
+  {
+    id: 38,
+    words: [
+      {
+        first: "May",
+        second: "t",
+        original: "be"
+      },
+      {
+        first: "yo",
+        second: "lly",
+        original: "u"
+      },
+      {
+        first: "thi",
+        second: "t",
+        original: "nk"
+      },
+      {
+        first: "I’",
+        second: "be",
+        original: "m"
+      },
+      {
+        first: "a",
+        second: "rk",
+        original: ""
+      },
+      {
+        first: "perv",
+        second: "t",
+        original: "ert"
+      },
+      {
+        first: "bu",
+        second: "ing",
+        original: "t"
+      },
+      {
+        first: "i",
+        second: "u",
+        original: "t"
+      },
+      {
+        first: "i",
+        second: "",
+        original: "s"
+      },
+      {
+        first: "rea",
+        second: "nk",
+        original: "lly"
+      },
+      {
+        first: "bor",
+        second: "ert",
+        original: "ing"
+      },
+      {
+        first: "a",
+        second: "s",
+        original: "t"
+      },
+      {
+        first: "wo",
+        second: "m",
+        original: "rk"
+      }
+    ],
+    quote: "Maybe you think I’m a pervert but it is really boring at work",
+    author: "Robin Stricklin"
+  },
+  {
+    id: 39,
+    words: [
+      {
+        first: "Tha",
+        second: "ist.",
+        original: "nk"
+      },
+      {
+        first: "Go",
+        second: "n",
+        original: "d"
+      },
+      {
+        first: "I’",
+        second: "nk",
+        original: "m"
+      },
+      {
+        first: "a",
+        second: "m",
+        original: "n"
+      },
+      {
+        first: "athe",
+        second: "d",
+        original: "ist."
+      }
+    ],
+    quote: "Thank God I’m an atheist.",
+    author: "Luis Bunuel"
+  },
+  {
+    id: 40,
+    words: [
+      {
+        first: "I",
+        second: "n",
+        original: ""
+      },
+      {
+        first: "ca",
+        second: "ist",
+        original: "n"
+      },
+      {
+        first: "res",
+        second: "ation",
+        original: "ist"
+      },
+      {
+        first: "every",
+        second: "",
+        original: "thing"
+      },
+      {
+        first: "exc",
+        second: "thing",
+        original: "ept"
+      },
+      {
+        first: "tempt",
+        second: "ept",
+        original: "ation"
+      }
+    ],
+    quote: "I can resist everything except temptation",
+    author: "Oscar Wilde"
+  },
+  {
+    id: 41,
+    words: [
+      {
+        first: "th",
+        second: "n",
+        original: "e"
+      },
+      {
+        first: "Que",
+        second: "r",
+        original: "st"
+      },
+      {
+        first: "fo",
+        second: "rn",
+        original: "r"
+      },
+      {
+        first: "th",
+        second: "d",
+        original: "e"
+      },
+      {
+        first: "tru",
+        second: "e",
+        original: "th"
+      },
+      {
+        first: "ha",
+        second: "st",
+        original: "d"
+      },
+      {
+        first: "be",
+        second: "th",
+        original: "en"
+      },
+      {
+        first: "bo",
+        second: "en",
+        original: "rn"
+      },
+      {
+        first: "i",
+        second: "e",
+        original: "n"
+      },
+      {
+        first: "m",
+        second: "e",
+        original: "e"
+      }
+    ],
+    quote: "the Quest for the truth had been born in me",
+    author: "Ida tarbell"
+  },
+  {
+    id: 42,
+    words: [
+      {
+        first: "Revolu",
+        second: "ose.",
+        original: "tions"
+      },
+      {
+        first: "ar",
+        second: "ays",
+        original: "e"
+      },
+      {
+        first: "alw",
+        second: "tions",
+        original: "ays"
+      },
+      {
+        first: "verb",
+        second: "e",
+        original: "ose."
+      }
+    ],
+    quote: "Revolutions are always verbose.",
+    author: "Leon Trotsky"
+  },
+  {
+    id: 43,
+    words: [
+      {
+        first: "Yo",
+        second: "n",
+        original: "u"
+      },
+      {
+        first: "can",
+        second: "u",
+        original: "’t"
+      },
+      {
+        first: "di",
+        second: "k.",
+        original: "e"
+      },
+      {
+        first: "wi",
+        second: "e",
+        original: "th"
+      },
+      {
+        first: "a",
+        second: "ished",
+        original: "n"
+      },
+      {
+        first: "unfin",
+        second: "th",
+        original: "ished"
+      },
+      {
+        first: "boo",
+        second: "’t",
+        original: "k."
+      }
+    ],
+    quote: "You can’t die with an unfinished book.",
+    author: "Terry Pratchett"
+  }
+
+
+
 
 
 ]
 
+// A good calf is better than a good head - Agnes de Mille
+// Absence of evidence is not evidence of absence - Carl Sagan
+// Extinction is the rule. Survival is the exception. ..
+// You'd be surprised how much it costs to look this cheap!
+// There is nothing new under the sun, but there are new suns. - Octavia Butler
+
+
+
 
 // This function calculates the number of days since July 14, 2025
 export function daysSince(): number {
-  console.log('Calculating days since July 14, 2025');
+  // console.log('Calculating days since July 14, 2025');
   // Austrian time zone is Europe/Vienna (UTC+1/+2)
   // const startDate = new Date('2025-07-14T00:00:00+02:00'); // July 13, 2025 at midnight Vienna time
   const startDate = new Date('2025-07-14T05:00:00-06:00'); // July 14 at midnight Chicago time
@@ -343,6 +1374,31 @@ export function daysSince(): number {
   const centralNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
   const diffTime = centralNow.getTime() - startDate.getTime();
   const count = diffTime / (1000 * 60 * 60 * 24);
-  console.log(`Days since: ${count}`);
+  // console.log(`Days since: ${count}`);
   return Math.floor(count);
 }
+
+// Calculate the number of days since July 14th, 2025 from a given date
+export function calculateDaysSince(date: Date): number {
+
+  const startDate = new Date('2025-07-14T00:00:00-06:00'); // July 14, 2025 at midnight Chicago time
+  const diffTime = date.getTime() - startDate.getTime();
+  const daysDiff = diffTime / (1000 * 60 * 60 * 24);
+  console.log('date test: ', daysDiff)
+  return Math.floor(daysDiff);
+}
+
+// Calculate the previous day from a given date
+export function calculatePrevDate(date: Date): Date {
+  const prevDate = new Date(date);
+  prevDate.setDate(prevDate.getDate() - 1);
+  return prevDate;
+}
+
+// Calculate the next day from a given date
+export function calculateNextDate(date: Date): Date {
+  const nextDate = new Date(date);
+  nextDate.setDate(nextDate.getDate() + 1);
+  return nextDate;
+}
+
