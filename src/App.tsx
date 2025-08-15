@@ -1,73 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import Generate from './Generate';
-import Confetti from './Confetti';
+import Generate from './components/Generate';
+import Confetti from './components/Confetti';
 import { calculateDaysSince, calculateNextDate, calculatePrevDate, quotesData } from './quotes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './fontawesome';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
-import { useDrag, useDrop } from 'react-dnd';
-import Modal from './Modal';
-import ModalInstructions from './ModalInstructions';
+import Modal from './components/modal/Modal';
+import ModalInstructions from './components/modal/ModalInstructions';
 import { faLink, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-
-const ItemType = 'WORD_HALF';
-
-// todo: the score thing is broken now?
-
-interface WordHalfProps {
-  word: { first: string; second: string; original: string };
-  index: number;
-  onWordDragged: (dragIndex: number, hoverIndex: number) => void;
-  onButtonClick: (index: number) => void;
-  isSelected: boolean;
-}
-
-// onWordDragged will accept the wordButton function, which handles the updates
-const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged, onButtonClick, isSelected }) => {
-  const [{ isDragging }, drag] = useDrag({
-    type: ItemType,
-    item: { index },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
-
-  const [{ isOver }, drop] = useDrop({
-    accept: ItemType,
-    drop: (item: { index: number }) => {
-      if (item.index !== index) {
-        onWordDragged(item.index, index);
-      }
-    },
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-    }),
-  });
-
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent background click handler
-    onButtonClick(index);
-  };
-
-  return (
-    <button
-      ref={(node) => drag(drop(node))}
-      className={`word-button word-button-split ${isDragging ? 'dragging' : ''} ${isOver ? 'drop-over' : ''} ${isSelected ? 'selected' : ''}`}
-      onClick={handleClick}
-      style={{
-        opacity: isDragging ? 0.5 : 1,
-      }}
-    >
-      <div className='left'>{word.first}</div>
-      <div className='right'>
-        {word.second !== '' ? word.second : '\u00A0'}
-      </div>
-    </button>
-  );
-};
+import WordButton from './components/WordButton';
 
 
 
@@ -75,21 +19,25 @@ const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged, onBut
 
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [words, setWords] = useState(quotesData[calculateDaysSince(currentDate) % quotesData.length].words);
-  // const author = quotesData[daysSince() % quotesData.length].author;
-  const [author, setAuthor] = useState(quotesData[calculateDaysSince(currentDate) % quotesData.length].author);
-
+  // const [words, setWords] = useState([...quotesData[calculateDaysSince(currentDate) % quotesData.length].words]);
+  type Word = { first: string; second: string; original: string };
+  const [words, setWords] = useState<Word[]>([]);
+  const [author, setAuthor] = useState<string>();
   const [wordPath, setWordPath] = useState<string[]>([]);
   const [scorePath, setScorePath] = useState<string[]>([]);
   const [showCopiedOverlay, setShowCopiedOverlay] = useState(false);
-
   // this is a copied overlay for the current puzzle link icon/button
   const [showLinkOverlay, setShowLinkOverlay] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  
   const [currentIndex, setCurrentIndex] = useState(calculateDaysSince(currentDate) % quotesData.length);
+  
+  const [attempts, setAttempts] = useState<number>(0);
+  const [numberCorrect, setNumberCorrect] = useState(0);
+  const [isSolved, setIsSolved] = useState(false);
+  
   const maxIndex = calculateDaysSince(new Date())
+
+
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -101,7 +49,7 @@ function App() {
   const resetPaths = () => {
     setWordPath([]);
     setScorePath([]);
-    setAttempts(-2);
+    setAttempts(0);
   }
 
   const updateWordPath = (p: string, b: boolean) => {
@@ -123,7 +71,7 @@ function App() {
     // };
 
     console.log(scorePath)
-    const text = `H🍏 - Solved in ${attempts + 1}!\n` + scorePath.join(' ');
+    const text = `H🍏 - Solved in ${attempts}!\n` + scorePath.join(' ');
     // const text = JSON.stringify(scoreData, null, 2);
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text)
@@ -193,9 +141,7 @@ function App() {
   }
 
 
-  const [attempts, setAttempts] = useState(-2);
-  const [numberCorrect, setNumberCorrect] = useState(0);
-  const [isSolved, setIsSolved] = useState(false);
+  
 
   // Click-to-swap functionality
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
@@ -203,10 +149,13 @@ function App() {
 
   // calculates the index of the current quote based on the number of days since a 
   // reference date, the grabs the appropriate quote from the quotesData array
+  // Note: this is also run on initialization, no need to set the words/author elsewhere
   useEffect(() => {
     // const index = (daysSince() - dateOffset) % quotesData.length;
-    setWords(quotesData[currentIndex].words);
+    console.log('index changed, updating words', quotesData)
+    setWords(structuredClone(quotesData[currentIndex].words));
     setAuthor(quotesData[currentIndex].author);
+    setAttempts(0)
   }, [currentIndex]);
 
   // on each update of the words, check if the words are solved
@@ -214,7 +163,8 @@ function App() {
   useEffect(() => {
     // Initialize words or perform any setup logic
     const solvedWords = words.filter(word => word.second === word.original);
-    setAttempts(attempts + 1);
+    // setAttempts(attempts + 1);
+    console.log('words check', words)
     setNumberCorrect(solvedWords.length);
     setIsSolved(solvedWords.length === words.length);
   }, [words]);
@@ -265,7 +215,7 @@ function App() {
     }
   }, []);
 
-
+  // used by dragging and clicking attempts
   const wordDragged = (button1Index: number, button2Index: number) => {
 
     // Swap the second halves of the two buttons
@@ -278,6 +228,9 @@ function App() {
       newWords[button2Index].original === newWords[button2Index].second
     );
     setWords(newWords);
+    setAttempts(attempts + 1)
+
+    console.log('quotesdata: ', quotesData);
     (document.activeElement as HTMLElement | null)?.blur(); // Remove focus from button after drag
   };
 
@@ -331,11 +284,13 @@ function App() {
       <div id='app-wrapper' className={`app-wrapper ${isSolved ? 'solved' : ''}`}>
         <nav className='app-nav'>
           <h1 className='app-title'>
-            HAPPLE #{currentIndex} <span className='muted'>{currentDate.toDateString()}</span>
+            HAPPLE<span className='muted'>#</span>{currentIndex} 
 
             {/* {(isSolved && (daysSince() !== 14 && daysSince() !== 13)) && 'Congrats!'} */}
 
           </h1>
+
+          <span className='muted'>{currentDate.toDateString()}</span>
 
           <div className='help-button'>
             <button onClick={handleOpenModal} className='icon-button' aria-label="Help">
@@ -347,7 +302,6 @@ function App() {
           <Modal show={isModalOpen} onClose={handleCloseModal}>
             <ModalInstructions onConfirm={handleCloseModal} />
           </Modal>
-          {isSolved && <p>You have found the sentence!</p>}
 
         </nav>
         <div className={`app ${isSolved ? 'solved' : ''}`} onClick={handleBackgroundClick}>
@@ -364,7 +318,7 @@ function App() {
           <footer className="game-footer">
 
             <div className='stats'>
-              <div><span>Attempt: </span><span className='badge'>{attempts + 1}</span></div>
+              <div><span>Attempt: </span><span className='badge'>{attempts}</span></div>
               <div><span>Correct: </span><span className='badge'>{numberCorrect}</span></div>
 
 
@@ -403,8 +357,8 @@ function App() {
 
           <button title='copy link to this puzzle' onClick={copyLink} className='link-button'>
             <FontAwesomeIcon icon={faLink} />
-            <span className={`badge copied-overlay ${showLinkOverlay ? 'show' : ''}`}>
-              <FontAwesomeIcon icon="check" /> PUZZLE URL COPIED!
+            <span className={`badge copied-overlay ${showLinkOverlay ? 'show' : ''}`} style={{width: '150px', right: '-65px'}}>
+              #{currentIndex} URL COPIED!
             </span>
           </button>
 
