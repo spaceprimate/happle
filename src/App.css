@@ -371,7 +371,8 @@ footer.game-footer .stats div{
   background-color: #8f2f2f;
 }
 
-.share-button .copied-overlay {
+.share-button .copied-overlay,
+.link-button .copied-overlay {
   position: absolute;
   top: -3rem;
   right: 0;
@@ -386,8 +387,13 @@ footer.game-footer .stats div{
   pointer-events: none;
   width: 120px;
 }
-.share-button .copied-overlay.show {
+.share-button .copied-overlay.show,
+.link-button .copied-overlay.show {
   opacity: 1;
+}
+
+.link-button{
+  position: relative;
 }
 
 

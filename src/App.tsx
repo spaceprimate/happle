@@ -12,7 +12,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import Birthday from './Birthday';
 import Modal from './Modal';
 import ModalInstructions from './ModalInstructions';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faLink, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 const ItemType = 'WORD_HALF';
 
@@ -80,6 +80,9 @@ function App() {
   const [wordPath, setWordPath] = useState<string[]>([]);
   const [scorePath, setScorePath] = useState<string[]>([]);
   const [showCopiedOverlay, setShowCopiedOverlay] = useState(false);
+
+  // this is a copied overlay for the current puzzle link icon/button
+  const [showLinkOverlay, setShowLinkOverlay] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -141,6 +144,16 @@ function App() {
     }
   };
 
+  const copyLink = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        setShowLinkOverlay(true);
+        setTimeout(() => setShowLinkOverlay(false), 2000);
+      })
+      .catch(err => console.error('Failed to copy link:', err));
+  };
+
   // const [dateOffset, setDateOffset] = useState<number>(0);
 
   const handlePreviousQuote = () => {
@@ -150,7 +163,14 @@ function App() {
       setCurrentIndex((currentIndex - 1 + quotesData.length) % quotesData.length);
       console.log('current index: ', currentIndex)
       resetPaths();
+
+      // update the url
+      const url = new URL(window.location.href);
+      url.searchParams.set('number', (currentIndex - 1).toString());
+      window.history.pushState({}, '', url);
     }
+
+
 
   }
 
@@ -159,6 +179,10 @@ function App() {
     setCurrentDate(calculateNextDate(currentDate));
     setCurrentIndex((currentIndex + 1) % quotesData.length);
     resetPaths();
+
+    const url = new URL(window.location.href);
+    url.searchParams.set('number', (currentIndex + 1).toString());
+    window.history.pushState({}, '', url);
   }
 
 
@@ -199,6 +223,38 @@ function App() {
 
     if (confirmedInstructions !== 'true') {
       setIsModalOpen(true);
+    }
+
+
+    // check to see if there's a GET variable called "number". If there is, set the currentIndex accordingly
+    const urlParams = new URLSearchParams(window.location.search);
+    const number = urlParams.get('number');
+    if (number) {
+      const index = parseInt(number, 10);
+      if (!isNaN(index) && index >= 0 && index <= maxIndex) {
+        setCurrentIndex(index);
+
+
+        // calculate the new date by subtracting the currentIndex from the maxIndex,
+        // then setting the currentDate accordingly
+        const newDate = new Date(currentDate);
+        newDate.setDate(newDate.getDate() - (maxIndex - (index)));
+        setCurrentDate(newDate);
+      }
+      else{
+        // remove the invalid index from the URL
+        const url = new URL(window.location.href);
+        url.searchParams.delete('number');
+        window.history.pushState({}, '', url);
+      }
+
+
+
+
+
+
+      // todo: make sure invalid numbers won't work
+      // todo: update the url on prev/next
     }
   }, []);
 
@@ -334,9 +390,17 @@ function App() {
         <div className='app-footer'>
 
 
-          <button className='previous-quote-button' onClick={handlePreviousQuote} disabled={currentIndex <= 1}>
+          <button className='previous-quote-button' onClick={handlePreviousQuote} disabled={currentIndex <= 0}>
             <FontAwesomeIcon icon="arrow-left" /> Previous
           </button>
+
+          <button title='copy link to this puzzle' onClick={copyLink} className='link-button'>
+            <FontAwesomeIcon icon={faLink} />
+            <span className={`badge copied-overlay ${showLinkOverlay ? 'show' : ''}`}>
+              <FontAwesomeIcon icon="check" /> PUZZLE URL COPIED!
+            </span>
+          </button>
+
           <button className='next-quote-button' onClick={handleNextQuote} disabled={currentIndex >= maxIndex}>
             Next <FontAwesomeIcon icon="arrow-right" />
           </button>
