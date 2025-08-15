@@ -211,7 +211,6 @@ function App() {
 
 
       // todo: make sure invalid numbers won't work
-      // todo: update the url on prev/next
     }
   }, []);
 
@@ -223,9 +222,16 @@ function App() {
     const temp = newWords[button1Index].second;
     newWords[button1Index].second = newWords[button2Index].second;
     newWords[button2Index].second = temp;
+
+    
+
+
     updateWordPath(
       (newWords[button2Index].first + newWords[button2Index].second),
-      newWords[button2Index].original === newWords[button2Index].second
+      // todo: we need a more complete evaluation here
+      (newWords[button2Index].original === newWords[button2Index].second || 
+        newWords[button1Index].original === newWords[button1Index].second
+      )
     );
     setWords(newWords);
     setAttempts(attempts + 1)
@@ -264,7 +270,6 @@ function App() {
       index={index}
       onWordDragged={wordDragged}
       onButtonClick={handleButtonClick}
-      isSelected={selectedButtonIndex === index}
     />
   ));
 

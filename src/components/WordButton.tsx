@@ -8,11 +8,10 @@ interface WordHalfProps {
   index: number;
   onWordDragged: (dragIndex: number, hoverIndex: number) => void;
   onButtonClick: (index: number) => void;
-  isSelected: boolean;
 }
 
 // onWordDragged will accept the wordButton function, which handles the updates
-const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged, onButtonClick, isSelected }) => {
+const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged, onButtonClick }) => {
   const [{ isDragging }, drag] = useDrag({
     type: ItemType,
     item: { index },
@@ -41,7 +40,8 @@ const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged, onBut
   return (
     <button
       ref={(node) => drag(drop(node))}
-      className={`word-button word-button-split ${isDragging ? 'dragging' : ''} ${isOver ? 'drop-over' : ''} ${isSelected ? 'selected' : ''}`}
+      // className={`word-button word-button-split ${isDragging ? 'dragging' : ''} ${isOver ? 'drop-over' : ''} ${isSelected ? 'selected' : ''}`}
+      className={`word-button word-button-split ${isDragging ? 'dragging' : ''} ${isOver ? 'drop-over' : ''} `}
       onClick={handleClick}
       style={{
         opacity: isDragging ? 0.5 : 1,

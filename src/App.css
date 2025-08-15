@@ -1,4 +1,4 @@
-#root{
+#root {
   min-height: 100vh;
   margin: 0 auto;
 }
@@ -10,7 +10,7 @@
   text-align: center;
 }
 
-.app-nav{
+.app-nav {
   background: #1a1a1a;
   padding: 0;
   min-height: 50px;
@@ -19,18 +19,18 @@
   align-items: center;
 }
 
-.app-nav .help-button button{
+.app-nav .help-button button {
   height: 50px;
   border-radius: 0;
 }
 
-.app-nav h1{
+.app-nav h1 {
   font-size: 15pt;
   margin: 0;
   padding-left: 14px;
 }
 
-#app-wrapper{
+#app-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -170,7 +170,7 @@ app.solved {
   justify-content: center;
 }
 
-.word-buttons .author{
+.word-buttons .author {
   padding-top: 1.2rem;
 }
 
@@ -196,13 +196,14 @@ app.solved {
   min-width: 0;
 }
 
-.word-buttons .word-button.word-button-split .left{
+.word-buttons .word-button.word-button-split .left {
   padding: 0.75rem 0 0.75em 1.5rem;
   background-color: #4ac5ac;
   border-bottom-left-radius: 25px;
   border-top-left-radius: 25px;
 }
-.word-buttons .word-button.word-button-split .right{
+
+.word-buttons .word-button.word-button-split .right {
   padding: 0.75rem 1.5rem 0.75em 0;
   background-color: #4ac5ac;
   border-bottom-right-radius: 25px;
@@ -226,14 +227,22 @@ app.solved {
   /* transform: translateY(-1px) scale(1.02); */
 }
 
-.word-buttons .word-button.word-button-split:hover{
+.word-buttons .word-button.word-button-split:hover {
   background-color: inherit;
 
 }
-.word-buttons .word-button.word-button-split:hover .right,
+
 .word-buttons .word-button.word-button-split:focus .right {
   background-color: #2d8573;
 }
+
+@media (hover:hover) {
+
+  .word-buttons .word-button.word-button-split:hover .right{
+    background-color: #2d8573;
+  }
+}
+
 
 /* Drag and drop styles */
 .word-buttons .word-button.word-button-split .right[draggable="true"] {
@@ -259,7 +268,7 @@ app.solved {
   .word-buttons .word-button.word-button-split .right[draggable="true"] {
     cursor: default;
   }
-  
+
   .word-buttons .word-button.word-button-split .right[draggable="true"]:active {
     background-color: #5fd3cb !important;
     transform: scale(1.1);
@@ -317,19 +326,19 @@ body.touch-dragging {
   height: 100%;
 }
 
-footer.game-footer{
+footer.game-footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-footer.game-footer .stats{
+footer.game-footer .stats {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-footer.game-footer .stats .badge{
+footer.game-footer .stats .badge {
   display: inline-block;
   padding: 0 0.5rem;
   background-color: #404aca;
@@ -340,7 +349,7 @@ footer.game-footer .stats .badge{
   height: 1.2rem;
 }
 
-footer.game-footer .stats div{
+footer.game-footer .stats div {
   color: #ddd;
   display: flex;
   gap: 0.5rem;
@@ -382,19 +391,20 @@ footer.game-footer .stats div{
   background-color: rgba(0, 0, 0, 0.9);
   color: white;
   padding: 0.5rem 1rem;
-  border-radius: 25px;  
+  border-radius: 25px;
   font-size: 0.8rem;
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
   width: 120px;
 }
+
 .share-button .copied-overlay.show,
 .link-button .copied-overlay.show {
   opacity: 1;
 }
 
-.link-button{
+.link-button {
   position: relative;
 }
 
@@ -405,29 +415,29 @@ footer.game-footer .stats div{
   .app {
     padding: 1rem;
   }
-  
+
   .sentence-form,
   .happle-container {
     padding: 1.5rem;
   }
-  
+
   .word-buttons {
     gap: 0.5rem;
   }
-  
+
   .word-button {
     padding: 0.6rem 1.2rem;
     font-size: 1rem;
     min-width: 80px;
   }
-  
+
   .app-header h1 {
     font-size: 2.5rem;
   }
 }
 
 
-.text-button{
+.text-button {
   background-color: transparent;
   border: none;
   color: #5fd3cb;
@@ -456,35 +466,41 @@ footer.game-footer .stats div{
 }
 
 @keyframes pulse-selected {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
   }
+
   50% {
     box-shadow: 0 0 30px rgba(255, 107, 107, 0.8);
   }
 }
 
 
-.previous-quote-button{
+.previous-quote-button {
   border-radius: 0;
 }
 
-.muted{
+.muted {
   color: #999;
 }
 
-.app-footer{
+.app-footer {
   min-height: 42px;
   display: flex;
   justify-content: space-around;
   background: #1a1a1a;
 }
-.app-footer button{
+
+.app-footer button {
   border-radius: 0;
 }
-.app-footer button:focus{
+
+.app-footer button:focus {
   outline: none;
 }
-.app-footer button:disabled{
+
+.app-footer button:disabled {
   opacity: 0.3;
 }
