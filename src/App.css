@@ -464,3 +464,19 @@ footer.game-footer .stats div{
 .muted{
   color: #999;
 }
+
+.app-footer{
+  min-height: 42px;
+  display: flex;
+  justify-content: space-around;
+  background: #1a1a1a;
+}
+.app-footer button{
+  border-radius: 0;
+}
+.app-footer button:focus{
+  outline: none;
+}
+.app-footer button:disabled{
+  opacity: 0.3;
+}

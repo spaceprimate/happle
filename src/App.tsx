@@ -84,6 +84,7 @@ function App() {
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentIndex, setCurrentIndex] = useState(calculateDaysSince(currentDate) % quotesData.length);
+  const maxIndex = calculateDaysSince(new Date())
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -144,9 +145,13 @@ function App() {
 
   const handlePreviousQuote = () => {
     // setDateOffset(dateOffset + 1);
-    setCurrentDate(calculatePrevDate(currentDate));
-    setCurrentIndex((currentIndex - 1 + quotesData.length) % quotesData.length);
-    resetPaths();
+    if (currentIndex > 0) {
+      setCurrentDate(calculatePrevDate(currentDate));
+      setCurrentIndex((currentIndex - 1 + quotesData.length) % quotesData.length);
+      console.log('current index: ', currentIndex)
+      resetPaths();
+    }
+
   }
 
   const handleNextQuote = () => {
@@ -184,7 +189,7 @@ function App() {
   }, [words]);
 
 
-// run once, handle initial setup
+  // run once, handle initial setup
   useEffect(() => {
     // check confirmedInstructions cookie. if "true", set isModalOpen to true
     const confirmedInstructions = document.cookie
@@ -326,10 +331,17 @@ function App() {
           }
           {isSolved && <Confetti />}
         </div>
+        <div className='app-footer'>
 
-        <button className='previous-quote-button' onClick={handlePreviousQuote}>
-          <FontAwesomeIcon icon="arrow-left" /> Previous Quote
-        </button>
+
+          <button className='previous-quote-button' onClick={handlePreviousQuote} disabled={currentIndex <= 1}>
+            <FontAwesomeIcon icon="arrow-left" /> Previous
+          </button>
+          <button className='next-quote-button' onClick={handleNextQuote} disabled={currentIndex >= maxIndex}>
+            Next <FontAwesomeIcon icon="arrow-right" />
+          </button>
+        </div>
+
       </div>
     </DndProvider>
   );
