@@ -1363,20 +1363,20 @@ export const quotesData = [
 
 
 // This function calculates the number of days since July 14, 2025
-export function daysSince(): number {
-  // console.log('Calculating days since July 14, 2025');
-  // Austrian time zone is Europe/Vienna (UTC+1/+2)
-  // const startDate = new Date('2025-07-14T00:00:00+02:00'); // July 13, 2025 at midnight Vienna time
-  const startDate = new Date('2025-07-14T05:00:00-06:00'); // July 14 at midnight Chicago time
-  const now = new Date();
-  // Convert both dates to Vienna time
-  // const viennaNow = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Vienna' }));
-  const centralNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
-  const diffTime = centralNow.getTime() - startDate.getTime();
-  const count = diffTime / (1000 * 60 * 60 * 24);
-  // console.log(`Days since: ${count}`);
-  return Math.floor(count);
-}
+// export function daysSince(): number {
+//   // console.log('Calculating days since July 14, 2025');
+//   // Austrian time zone is Europe/Vienna (UTC+1/+2)
+//   // const startDate = new Date('2025-07-14T00:00:00+02:00'); // July 13, 2025 at midnight Vienna time
+//   const startDate = new Date('2025-07-14T05:00:00-06:00'); // July 14 at midnight Chicago time
+//   const now = new Date();
+//   // Convert both dates to Vienna time
+//   // const viennaNow = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Vienna' }));
+//   const centralNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+//   const diffTime = centralNow.getTime() - startDate.getTime();
+//   const count = diffTime / (1000 * 60 * 60 * 24);
+//   // console.log(`Days since: ${count}`);
+//   return Math.floor(count);
+// }
 
 // Calculate the number of days since July 14th, 2025 from a given date
 export function calculateDaysSince(date: Date): number {

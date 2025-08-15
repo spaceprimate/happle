@@ -26,3 +26,7 @@
 
 30.372544722222223
 30.37453775462963
+
+
+## paths reset issue: 
+- preliminary fix is just to fully reset on next/prev/reload

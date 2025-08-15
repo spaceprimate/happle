@@ -2,19 +2,20 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Generate from './Generate';
 import Confetti from './Confetti';
-import { calculateDaysSince, calculateNextDate, calculatePrevDate, daysSince, quotesData } from './quotes';
+import { calculateDaysSince, calculateNextDate, calculatePrevDate, quotesData } from './quotes';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './fontawesome';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { TouchBackend } from 'react-dnd-touch-backend';
 import { useDrag, useDrop } from 'react-dnd';
-import Birthday from './Birthday';
 import Modal from './Modal';
 import ModalInstructions from './ModalInstructions';
 import { faLink, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 const ItemType = 'WORD_HALF';
+
+// todo: the score thing is broken now?
 
 interface WordHalfProps {
   word: { first: string; second: string; original: string };
@@ -73,9 +74,10 @@ const WordButton: React.FC<WordHalfProps> = ({ word, index, onWordDragged, onBut
 
 
 function App() {
-  const [words, setWords] = useState(quotesData[daysSince() % quotesData.length].words);
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [words, setWords] = useState(quotesData[calculateDaysSince(currentDate) % quotesData.length].words);
   // const author = quotesData[daysSince() % quotesData.length].author;
-  const [author, setAuthor] = useState(quotesData[daysSince() % quotesData.length].author);
+  const [author, setAuthor] = useState(quotesData[calculateDaysSince(currentDate) % quotesData.length].author);
 
   const [wordPath, setWordPath] = useState<string[]>([]);
   const [scorePath, setScorePath] = useState<string[]>([]);
@@ -85,7 +87,7 @@ function App() {
   const [showLinkOverlay, setShowLinkOverlay] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [currentDate, setCurrentDate] = useState(new Date());
+  
   const [currentIndex, setCurrentIndex] = useState(calculateDaysSince(currentDate) % quotesData.length);
   const maxIndex = calculateDaysSince(new Date())
 
@@ -108,6 +110,9 @@ function App() {
 
     const score = scorePath.concat(b ? '🟩' : '🟥');
     setScorePath(score);
+
+    console.log('Word path updated:', score);
+    console.log('attempts', attempts)
   }
 
   const copyScore = () => {
@@ -116,6 +121,8 @@ function App() {
     //   numberCorrect,
     //   wordPath,
     // };
+
+    console.log(scorePath)
     const text = `H🍏 - Solved in ${attempts + 1}!\n` + scorePath.join(' ');
     // const text = JSON.stringify(scoreData, null, 2);
     if (navigator.clipboard) {
