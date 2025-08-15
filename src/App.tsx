@@ -12,6 +12,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import Birthday from './Birthday';
 import Modal from './Modal';
 import ModalInstructions from './ModalInstructions';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
 const ItemType = 'WORD_HALF';
 
@@ -79,7 +80,7 @@ function App() {
   const [wordPath, setWordPath] = useState<string[]>([]);
   const [scorePath, setScorePath] = useState<string[]>([]);
   const [showCopiedOverlay, setShowCopiedOverlay] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const [currentIndex, setCurrentIndex] = useState(calculateDaysSince(currentDate) % quotesData.length);
@@ -163,14 +164,6 @@ function App() {
   // Click-to-swap functionality
   const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
 
-  useEffect(() => {
-    console.log(`Current Date: ${currentDate}, Current Index: ${currentIndex}`);
-    console.log(quotesData[currentIndex]);
-
-
-    const testDate = new Date(2025, 6, 14); // July is month 6 (0-based)
-    console.log(testDate, calculateDaysSince(testDate), quotesData[calculateDaysSince(testDate)]);
-  }, [currentDate]);
 
   // calculates the index of the current quote based on the number of days since a 
   // reference date, the grabs the appropriate quote from the quotesData array
@@ -189,6 +182,20 @@ function App() {
     setNumberCorrect(solvedWords.length);
     setIsSolved(solvedWords.length === words.length);
   }, [words]);
+
+
+// run once, handle initial setup
+  useEffect(() => {
+    // check confirmedInstructions cookie. if "true", set isModalOpen to true
+    const confirmedInstructions = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('confirmedInstructions='))
+      ?.split('=')[1];
+
+    if (confirmedInstructions !== 'true') {
+      setIsModalOpen(true);
+    }
+  }, []);
 
 
   const wordDragged = (button1Index: number, button2Index: number) => {
@@ -242,7 +249,6 @@ function App() {
 
 
 
-  console.log(calculateDaysSince(new Date()));
 
   // Detect if touch device
   const isTouchDevice = () => {
@@ -257,10 +263,17 @@ function App() {
       <div id='app-wrapper' className={`app-wrapper ${isSolved ? 'solved' : ''}`}>
         <nav className='app-nav'>
           <h1 className='app-title'>
-              HAPPLE #{currentIndex} <span className='muted'>{currentDate.toDateString()}</span>
+            HAPPLE #{currentIndex} <span className='muted'>{currentDate.toDateString()}</span>
+
             {/* {(isSolved && (daysSince() !== 14 && daysSince() !== 13)) && 'Congrats!'} */}
 
           </h1>
+
+          <div className='help-button'>
+            <button onClick={handleOpenModal} className='icon-button' aria-label="Help">
+              <FontAwesomeIcon icon={faQuestionCircle} />
+            </button>
+          </div>
 
 
           <Modal show={isModalOpen} onClose={handleCloseModal}>
@@ -304,10 +317,7 @@ function App() {
           )}
         </div> */}
           </footer>
-          <div className='footer-date'>
-            {new Date().toLocaleDateString('de-AT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Europe/Vienna' })}
-            {/* {new Date().toDateString()} */}
-          </div>
+
           {window.location.hash === '#admin' && <Generate />}
           {window.location.hash === '#test' &&
             <button className='next-quote-button' onClick={handleNextQuote}>

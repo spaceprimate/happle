@@ -1384,7 +1384,6 @@ export function calculateDaysSince(date: Date): number {
   const startDate = new Date('2025-07-14T00:00:00-06:00'); // July 14, 2025 at midnight Chicago time
   const diffTime = date.getTime() - startDate.getTime();
   const daysDiff = diffTime / (1000 * 60 * 60 * 24);
-  console.log('date test: ', daysDiff)
   return Math.floor(daysDiff);
 }
 

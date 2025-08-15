@@ -19,6 +19,7 @@
   min-width: 300px;
   max-width: 90vw;
   position: relative;
+  margin: 0 14px;
 }
 
 .modal-content button, 
