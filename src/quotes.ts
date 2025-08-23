@@ -1345,6 +1345,516 @@ export const quotesData = [
     ],
     quote: "You can’t die with an unfinished book.",
     author: "Terry Pratchett"
+  },
+
+  {
+    id: 44,
+    words: [
+      {
+        first: "mo",
+        second: "endo",
+        original: "ve"
+      },
+      {
+        first: "i",
+        second: "p",
+        original: "t"
+      },
+      {
+        first: "u",
+        second: "tch",
+        original: "p"
+      },
+      {
+        first: "do",
+        second: "t",
+        original: "wn"
+      },
+      {
+        first: "le",
+        second: "ht",
+        original: "ft"
+      },
+      {
+        first: "rig",
+        second: "p",
+        original: "ht"
+      },
+      {
+        first: "o",
+        second: "t",
+        original: "h"
+      },
+      {
+        first: "swi",
+        second: "h",
+        original: "tch"
+      },
+      {
+        first: "i",
+        second: "ke",
+        original: "t"
+      },
+      {
+        first: "u",
+        second: "wn",
+        original: "p"
+      },
+      {
+        first: "li",
+        second: "ve",
+        original: "ke"
+      },
+      {
+        first: "nint",
+        second: "ft",
+        original: "endo"
+      }
+    ],
+    quote: "move it up down left right oh switch it up like nintendo",
+    author: "Sabrina Carpenter"
+  },
+  {
+    id: 45,
+    words: [
+      {
+        first: "A",
+        second: "ating.",
+        original: ""
+      },
+      {
+        first: "wo",
+        second: "e",
+        original: "rd"
+      },
+      {
+        first: "t",
+        second: "se",
+        original: "o"
+      },
+      {
+        first: "th",
+        second: "s",
+        original: "e"
+      },
+      {
+        first: "wi",
+        second: "rd",
+        original: "se"
+      },
+      {
+        first: "i",
+        second: "",
+        original: "s"
+      },
+      {
+        first: "infuri",
+        second: "o",
+        original: "ating."
+      }
+    ],
+    quote: "A word to the wise is infuriating.",
+    author: "Hunter S. Thompson"
+  },
+  {
+    id: 46,
+    words: [
+      {
+        first: "Wh",
+        second: "e",
+        original: "y"
+      },
+      {
+        first: "Ar",
+        second: "m",
+        original: "e"
+      },
+      {
+        first: "Yo",
+        second: "?",
+        original: "u"
+      },
+      {
+        first: "Boo",
+        second: "u",
+        original: "ing"
+      },
+      {
+        first: "Me",
+        second: "y",
+        original: "?"
+      },
+      {
+        first: "I’",
+        second: "ht",
+        original: "m"
+      },
+      {
+        first: "Rig",
+        second: "ing",
+        original: "ht"
+      }
+    ],
+    quote: "Why Are You Booing Me? I’m Right",
+    author: "Hannibal Buress"
+  },
+  {
+    id: 47,
+    words: [
+      {
+        first: "Wha",
+        second: "her",
+        original: "t’s"
+      },
+      {
+        first: "anot",
+        second: "urus?",
+        original: "her"
+      },
+      {
+        first: "wo",
+        second: "r",
+        original: "rd"
+      },
+      {
+        first: "fo",
+        second: "t’s",
+        original: "r"
+      },
+      {
+        first: "thesa",
+        second: "rd",
+        original: "urus?"
+      }
+    ],
+    quote: "What’s another word for thesaurus?",
+    author: "Steven Wright"
+  },
+  {
+    id: 48,
+    words: [
+      {
+        first: "Real",
+        second: "",
+        original: "ity:"
+      },
+      {
+        first: "Wh",
+        second: "ept!",
+        original: "at"
+      },
+      {
+        first: "a",
+        second: "at",
+        original: ""
+      },
+      {
+        first: "conc",
+        second: "ity:",
+        original: "ept!"
+      }
+    ],
+    quote: "Reality: What a concept!",
+    author: "Robin Williams"
+  },
+  {
+    id: 49,
+    words: [
+      {
+        first: "Lo",
+        second: "t",
+        original: "ve"
+      },
+      {
+        first: "i",
+        second: "",
+        original: "s"
+      },
+      {
+        first: "bli",
+        second: "s",
+        original: "nd"
+      },
+      {
+        first: "bu",
+        second: "pener",
+        original: "t"
+      },
+      {
+        first: "marr",
+        second: "s",
+        original: "iage"
+      },
+      {
+        first: "i",
+        second: "al",
+        original: "s"
+      },
+      {
+        first: "a",
+        second: "iage",
+        original: ""
+      },
+      {
+        first: "re",
+        second: "ve",
+        original: "al"
+      },
+      {
+        first: "eye-o",
+        second: "nd",
+        original: "pener"
+      }
+    ],
+    quote: "Love is blind but marriage is a real eye-opener",
+    author: "Pauline Thomason"
+  },
+  {
+    id: 50,
+    words: [
+      {
+        first: "Lo",
+        second: "t",
+        original: "rd"
+      },
+      {
+        first: "ma",
+        second: "t",
+        original: "ke"
+      },
+      {
+        first: "m",
+        second: "rd",
+        original: "e"
+      },
+      {
+        first: "pu",
+        second: "t",
+        original: "re"
+      },
+      {
+        first: "bu",
+        second: "re",
+        original: "t"
+      },
+      {
+        first: "no",
+        second: "ke",
+        original: "t"
+      },
+      {
+        first: "ye",
+        second: "e",
+        original: "t"
+      }
+    ],
+    quote: "Lord make me pure but not yet",
+    author: "Saint Augustine"
+  },
+  {
+    id: 51,
+    words: [
+      {
+        first: "Le",
+        second: "ke",
+        original: "ia"
+      },
+      {
+        first: "foll",
+        second: "ll",
+        original: "ows"
+      },
+      {
+        first: "m",
+        second: "ue",
+        original: "e"
+      },
+      {
+        first: "li",
+        second: "",
+        original: "ke"
+      },
+      {
+        first: "a",
+        second: "e",
+        original: ""
+      },
+      {
+        first: "vag",
+        second: "ows",
+        original: "ue"
+      },
+      {
+        first: "sme",
+        second: "ia",
+        original: "ll"
+      }
+    ],
+    quote: "Leia follows me like a vague smell",
+    author: "Carrie Fisher"
+  },
+  {
+    id: 52,
+    words: [
+      {
+        first: "Incl",
+        second: "t",
+        original: "ude"
+      },
+      {
+        first: "m",
+        second: "ude",
+        original: "e"
+      },
+      {
+        first: "ou",
+        second: "e",
+        original: "t"
+      }
+    ],
+    quote: "Include me out",
+    author: "Samuel Goldwyn"
+  },
+  {
+    id: 53,
+    words: [
+      {
+        first: "Wh",
+        second: "",
+        original: "at"
+      },
+      {
+        first: "ca",
+        second: "at",
+        original: "n"
+      },
+      {
+        first: "yo",
+        second: "t",
+        original: "u"
+      },
+      {
+        first: "do",
+        second: "u",
+        original: "?"
+      },
+      {
+        first: "Medi",
+        second: "s",
+        original: "cine"
+      },
+      {
+        first: "i",
+        second: "?",
+        original: "s"
+      },
+      {
+        first: "no",
+        second: "nce",
+        original: "t"
+      },
+      {
+        first: "a",
+        second: "cine",
+        original: ""
+      },
+      {
+        first: "scie",
+        second: "n",
+        original: "nce"
+      }
+    ],
+    quote: "What can you do? Medicine is not a science",
+    author: "Dr. Spaceman"
+  },
+  {
+    id: 54,
+    words: [
+      {
+        first: "Ti",
+        second: ".",
+        original: "me"
+      },
+      {
+        first: "i",
+        second: "me",
+        original: "s"
+      },
+      {
+        first: "a",
+        second: "ion.",
+        original: "n"
+      },
+      {
+        first: "illus",
+        second: "bly",
+        original: "ion."
+      },
+      {
+        first: "Lunch",
+        second: "s",
+        original: "time"
+      },
+      {
+        first: "dou",
+        second: "time",
+        original: "bly"
+      },
+      {
+        first: "so",
+        second: "n",
+        original: "."
+      }
+    ],
+    quote: "Time is an illusion. Lunchtime doubly so.",
+    author: "Douglas Adams"
+  },
+  {
+    id: 55,
+    words: [
+      {
+        first: "T",
+        second: "ine",
+        original: "o"
+      },
+      {
+        first: "er",
+        second: "t",
+        original: "r"
+      },
+      {
+        first: "i",
+        second: "o",
+        original: "s"
+      },
+      {
+        first: "hum",
+        second: "s",
+        original: "an,"
+      },
+      {
+        first: "bu",
+        second: "r",
+        original: "t"
+      },
+      {
+        first: "i",
+        second: "ls",
+        original: "t"
+      },
+      {
+        first: "fee",
+        second: "an,",
+        original: "ls"
+      },
+      {
+        first: "div",
+        second: "t",
+        original: "ine"
+      }
+    ],
+    quote: "To err is human, but it feels divine",
+    author: "Mae West"
   }
 
 
